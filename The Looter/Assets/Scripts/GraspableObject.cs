@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class GraspableObject : MonoBehaviour{
     [SerializeField] string name;
     private GameObject player;
     private bool isPicked = false;
+    [SerializeField] private AudioSource pickSFX;
+
 
 
     void Start(){
@@ -16,8 +19,13 @@ public class GraspableObject : MonoBehaviour{
     public void GetPicked(){
         if(!isPicked){
             isPicked = true;
+            pickSFX.Play();
             player.GetComponent<PlayerInventory>().AddString(name);
-            gameObject.SetActive(false);
+            DOVirtual.DelayedCall(pickSFX.clip.length, () => {
+                gameObject.SetActive(false);
+            });
+
         }
     }
+
 }

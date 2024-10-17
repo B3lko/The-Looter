@@ -11,6 +11,8 @@ public class Raycast : MonoBehaviour{
     void Start(){
         textsString.Add("Door1", "Press 'E' to open");
         textsString.Add("Door2", "Press 'E' to close");
+        textsString.Add("Door3", "First I must loot the tombs");
+        textsString.Add("Door4", "First I have to grab the tools in the trunk of the car");
         textsString.Add("Grasp", "Press 'E' to pick");
         textsString.Add("Dig", "Press 'E' to dig");
     }
@@ -24,6 +26,8 @@ public class Raycast : MonoBehaviour{
             if(hit.transform.gameObject.tag == "Door"){
                 if(hit.transform.gameObject.GetComponent<DoorController>().GetIsOpen()){text.text = textsString["Door2"];}
                 else{text.text = textsString["Door1"];}
+                //text.text
+                text.text = hit.transform.gameObject.GetComponent<DoorController>().GetTextState();
                 text.gameObject.SetActive(true);
                 if(Input.GetKeyDown(KeyCode.E)){
                     hit.transform.gameObject.GetComponent<DoorController>().ToggleDoor();
@@ -36,11 +40,11 @@ public class Raycast : MonoBehaviour{
                     hit.transform.gameObject.GetComponent<GraspableObject>().GetPicked();
                 }
             }
-            else if(hit.transform.gameObject.tag == "Dig"){
+            else if(hit.transform.gameObject.tag == "Grave"){
                 text.text = textsString["Dig"];
                 text.gameObject.SetActive(true);
                 if(Input.GetKeyDown(KeyCode.E)){
-                    hit.transform.gameObject.GetComponent<GraspableObject>().GetPicked();
+                    hit.transform.gameObject.GetComponent<GraveController>().StartPalada();
                 }
             }
             else{

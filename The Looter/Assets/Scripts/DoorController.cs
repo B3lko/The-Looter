@@ -4,6 +4,10 @@ using UnityEngine;
 using DG.Tweening;
 
 public class DoorController : MonoBehaviour {
+    [SerializeField] private bool NeedThings;
+    [SerializeField] int index;
+    [SerializeField] int state = 2;
+    [SerializeField] bool canOpen = true;
     [SerializeField] private AudioSource openSFX;
     [SerializeField] private AudioSource closeSFX;
     [SerializeField] private bool hasSound;
@@ -26,6 +30,7 @@ public class DoorController : MonoBehaviour {
         // Si la puerta empieza abierta, actualizamos su rotación inicial
         if (isOpen) {
             transform.localRotation = openRotation;
+            state = 1;
         }
     }
 
@@ -34,9 +39,28 @@ public class DoorController : MonoBehaviour {
         return isOpen;
     }
 
+    public void SetCanOpen(bool can){
+        canOpen = can;
+    }
+
+    public string GetTextState(){
+        switch(state){
+            case 1: return "Press 'E' to close";
+            case 2: return "Press 'E' to open";
+            case 3: return "First I must loot the tombs";
+            case 4: return "First I have to grab the tools in the trunk of the car";
+            default: return "No deberias estar viendo esto";
+        }
+    }
+
+    
+
 
     public void ToggleDoor() {
-        if (!isMoving) {
+        if(state == 3 || state == 4){
+            openSFX.Play();
+        }
+        else if (!isMoving && canOpen) {
             isMoving = true;
 
             // Alternamos entre la rotación abierta y cerrada
@@ -48,6 +72,7 @@ public class DoorController : MonoBehaviour {
                 transform.DOLocalRotateQuaternion(initialRotation, duration).OnComplete(() => {
                     isMoving = false;
                     isOpen = false;
+                    state = 2;
                 });
             } else {
                 if(hasSound){
@@ -57,53 +82,9 @@ public class DoorController : MonoBehaviour {
                 transform.DOLocalRotateQuaternion(openRotation, duration).OnComplete(() => {
                     isMoving = false;
                     isOpen = true;
+                    state = 1;
                 });
             }
         }
     }
 }
-/*using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using DG.Tweening;
-
-public class DoorController : MonoBehaviour{
-    [SerializeField] bool isLeft;
-    [SerializeField] bool isOpen;
-    public float openAngle = 90f;
-    public float duration = 1f;
-    //private float scale = 0.8f;
-    private bool isMoving = false;
-    public void Open(){
-        if(Input.GetKeyDown(KeyCode.E) && !isMoving){
-            isMoving = true;
-            if(isOpen){
-                isOpen = false;
-                if(isLeft){
-                    transform.DORotate(new Vector3(0, transform.rotation.y - openAngle, 0), duration, RotateMode.LocalAxisAdd).OnComplete(() => {
-                        isMoving = false;
-                    });                 
-                }
-                else{
-                    transform.DORotate(new Vector3(0, transform.rotation.y + openAngle, 0), duration, RotateMode.LocalAxisAdd).OnComplete(() => {
-                        isMoving = false;
-                    });
-                }
-            }
-            else{
-                isOpen = true;
-                if(isLeft){
-                    transform.DORotate(new Vector3(0, transform.rotation.y + openAngle, 0), duration, RotateMode.LocalAxisAdd).OnComplete(() => {
-                        isMoving = false;
-                    });
-                }
-                else{
-                    transform.DORotate(new Vector3(0, transform.rotation.y - openAngle, 0), duration, RotateMode.LocalAxisAdd).OnComplete(() => {
-                        isMoving = false;
-                    });
-                }
-            }
-        }
-    }
-}
-*/
