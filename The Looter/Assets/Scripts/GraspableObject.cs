@@ -14,7 +14,7 @@ public class GraspableObject : MonoBehaviour{
 
 
     public void GetPicked(){
-        if(Input.GetKeyDown(KeyCode.E) && !isPicked){
+        if(!isPicked){
             isPicked = true;
             player.GetComponent<PlayerInventory>().AddString(name);
             gameObject.SetActive(false);

@@ -36,7 +36,7 @@ public class DoorController : MonoBehaviour {
 
 
     public void ToggleDoor() {
-        if (Input.GetKeyDown(KeyCode.E) && !isMoving) {
+        if (!isMoving) {
             isMoving = true;
 
             // Alternamos entre la rotación abierta y cerrada
