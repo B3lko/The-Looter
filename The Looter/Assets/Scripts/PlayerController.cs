@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour{
     [SerializeField] GameObject flashLigth;
+    [SerializeField] GameObject book;
+    [SerializeField] bool hasALigthFlash = false;
+    [SerializeField] bool hasABook = false;
     [SerializeField] AudioSource flashLigthOn;
     [SerializeField] AudioSource flashLigthOff;
     private bool isFlashOn = false; 
+    private bool isBookOn = false; 
     private CharacterController _player;
     [SerializeField] private float _moveSpeed, _gravity, _fallVelocity, _jumpForce;
     private Vector3 _axis, _movePlayer;
@@ -26,9 +30,9 @@ public class PlayerController : MonoBehaviour{
     private void SetGravity(){
         if(_player.isGrounded){
             _fallVelocity = -_gravity * Time.deltaTime;
-            if(Input.GetKeyDown(KeyCode.Space)){
+            /*if(Input.GetKeyDown(KeyCode.Space)){
                 _fallVelocity = _jumpForce;
-            }
+            }*/
         }
         else{
             _fallVelocity -= _gravity * Time.deltaTime; 
@@ -36,8 +40,19 @@ public class PlayerController : MonoBehaviour{
         moveDirection.y = _fallVelocity;
     }
 
+
+    public void SetHasLightFlash(bool has){
+        hasALigthFlash = has;
+    }
+
+
+    public void SetHasBook(bool has){
+        hasABook = has;
+    }
+
+
     void Update(){
-        if(Input.GetKeyDown(KeyCode.F)){
+        if(Input.GetKeyDown(KeyCode.F) && hasALigthFlash){
             isFlashOn = !isFlashOn; 
             flashLigth.SetActive(isFlashOn);
             if(isFlashOn){
@@ -47,8 +62,15 @@ public class PlayerController : MonoBehaviour{
                 flashLigthOff.Play();
             }
         }
-        if(Input.GetKeyDown(KeyCode.Z)){
-           // moveSpeed = 
+        if(Input.GetKeyDown(KeyCode.B) && hasABook){
+           isBookOn = !isBookOn; 
+            book.SetActive(isBookOn);
+            if(isBookOn){
+                flashLigthOn.Play();
+            }
+            else{
+                flashLigthOff.Play();
+            }
         }
 
         // Movimiento del ratón
