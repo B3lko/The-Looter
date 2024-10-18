@@ -17,6 +17,7 @@ public class Raycast : MonoBehaviour{
         textsString.Add("Dig", "Press 'E' to dig");
         textsString.Add("Tomb", "Press 'E' to read");
         textsString.Add("Coffin", "Press 'E' to open the coffin");
+        textsString.Add("Wall", "I'm not leaving without looting first");
     }
 
     void Update(){
@@ -55,6 +56,10 @@ public class Raycast : MonoBehaviour{
                 if(Input.GetKeyDown(KeyCode.E)){
                     hit.transform.gameObject.GetComponent<CoffinController>().DoRotate();
                 }
+            }
+            else if(hit.transform.gameObject.tag == "Wall"){
+                text.text = textsString["Wall"];
+                text.gameObject.SetActive(true);
             }
             else{
                 text.gameObject.SetActive(false);
