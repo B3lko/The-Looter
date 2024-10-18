@@ -53,8 +53,18 @@ public class DoorController : MonoBehaviour {
         }
     }
 
-    
+    public void SetState(int stt){
+        state = stt;
+    }
 
+    
+    public void CloseDoor(){
+        if(hasSound){closeSFX.Play();}
+        transform.DOLocalRotateQuaternion(initialRotation, duration).OnComplete(() => {
+            isMoving = false;
+            isOpen = false;
+        });
+    }
 
     public void ToggleDoor() {
         if(state == 3 || state == 4){

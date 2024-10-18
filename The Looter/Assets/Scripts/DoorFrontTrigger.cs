@@ -7,12 +7,20 @@ public class DoorFrontTrigger : MonoBehaviour{
     void OnTriggerExit(Collider other){
         if(other.gameObject.tag == "Player"){
             if(Door1.GetComponent<DoorController>().GetIsOpen()){
-                Door1.GetComponent<DoorController>().ToggleDoor();
-                Door1.GetComponent<DoorController>().SetCanOpen(false);
+                Door1.GetComponent<DoorController>().CloseDoor();
+                Door1.GetComponent<DoorController>().SetState(3);
+                //Door1.GetComponent<DoorController>().SetCanOpen(false);
+            }
+            else{
+                Door1.GetComponent<DoorController>().SetState(3);
             }
             if(Door2.GetComponent<DoorController>().GetIsOpen()){
-                Door2.GetComponent<DoorController>().ToggleDoor();
-                Door2.GetComponent<DoorController>().SetCanOpen(false);
+                Door2.GetComponent<DoorController>().CloseDoor();
+                Door2.GetComponent<DoorController>().SetState(3);
+                //Door2.GetComponent<DoorController>().SetCanOpen(false);
+            }
+            else{
+                Door2.GetComponent<DoorController>().SetState(3);
             }
         }
     }
