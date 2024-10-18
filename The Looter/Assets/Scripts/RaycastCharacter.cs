@@ -15,6 +15,8 @@ public class Raycast : MonoBehaviour{
         textsString.Add("Door4", "First I have to grab the tools in the trunk of the car");
         textsString.Add("Grasp", "Press 'E' to pick");
         textsString.Add("Dig", "Press 'E' to dig");
+        textsString.Add("Tomb", "Press 'E' to read");
+        textsString.Add("Coffin", "Press 'E' to open the coffin");
     }
 
     void Update(){
@@ -44,7 +46,14 @@ public class Raycast : MonoBehaviour{
                 text.text = textsString["Dig"];
                 text.gameObject.SetActive(true);
                 if(Input.GetKeyDown(KeyCode.E)){
-                    hit.transform.gameObject.GetComponent<GraveController>().StartPalada();
+                    hit.transform.gameObject.GetComponent<GraveController>().DoPalada();
+                }
+            }
+            else if(hit.transform.gameObject.tag == "Coffin"){
+                text.text = textsString["Coffin"];
+                text.gameObject.SetActive(true);
+                if(Input.GetKeyDown(KeyCode.E)){
+                    hit.transform.gameObject.GetComponent<CoffinController>().DoRotate();
                 }
             }
             else{
