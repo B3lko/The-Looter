@@ -1,10 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using DG.Tweening;
 
 public class Raycast : MonoBehaviour{
     float maxDistance = 4f;
     public TextMeshProUGUI text;
+    [SerializeField] TextMeshProUGUI textDown;
+
     private Dictionary<string, string> textsString = new Dictionary<string, string>();
 
 
@@ -17,7 +20,9 @@ public class Raycast : MonoBehaviour{
         textsString.Add("Dig", "Press 'E' to dig");
         textsString.Add("Tomb", "Press 'E' to read");
         textsString.Add("Coffin", "Press 'E' to open the coffin");
+        textsString.Add("Jewel", "Press 'E' to pick the jewel");
         textsString.Add("Wall", "I'm not leaving without looting first");
+        //textsString.Add("Tomb", "I'm not leaving without looting first");
     }
 
     void Update(){
@@ -60,6 +65,24 @@ public class Raycast : MonoBehaviour{
             else if(hit.transform.gameObject.tag == "Wall"){
                 text.text = textsString["Wall"];
                 text.gameObject.SetActive(true);
+            }
+            else if(hit.transform.gameObject.tag == "Tomb"){
+                text.text = textsString["Tomb"];
+                text.gameObject.SetActive(true);
+                if(Input.GetKeyDown(KeyCode.E)){
+                    textDown.text = hit.transform.gameObject.GetComponent<TombController>().GetName();
+                    textDown.gameObject.SetActive(true);
+                    DOVirtual.DelayedCall(3, () => {
+                        textDown.gameObject.SetActive(false);
+                    });
+                }
+            }
+            else if(hit.transform.gameObject.tag == "Jewel"){
+                text.text = textsString["Jewel"];
+                text.gameObject.SetActive(true);
+                if(Input.GetKeyDown(KeyCode.E)){
+                    hit.transform.gameObject.SetActive(true);
+                }
             }
             else{
                 text.gameObject.SetActive(false);

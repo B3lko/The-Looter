@@ -10,6 +10,8 @@ TagManager:
   - NPC
   - Coffin
   - Wall
+  - Tomb
+  - Jewel
   layers:
   - Default
   - TransparentFX

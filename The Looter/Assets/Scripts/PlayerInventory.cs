@@ -39,6 +39,10 @@ public class PlayerInventory : MonoBehaviour{
                 text.gameObject.SetActive(false);
             });
         }
+
+        if(newString == "Jewel"){
+            
+        }
     }
     
 }
