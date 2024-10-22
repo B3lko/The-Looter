@@ -22,6 +22,7 @@ public class DoorFrontTrigger : MonoBehaviour{
             else{
                 Door2.GetComponent<DoorController>().SetState(3);
             }
+            Destroy(gameObject);
         }
     }
 }

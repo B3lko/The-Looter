@@ -7,11 +7,11 @@ TagManager:
   - Door
   - Graspable
   - Grave
-  - NPC
   - Coffin
   - Wall
   - Tomb
   - Jewel
+  - Book
   layers:
   - Default
   - TransparentFX

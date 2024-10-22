@@ -81,7 +81,7 @@ public class Raycast : MonoBehaviour{
                 text.text = textsString["Jewel"];
                 text.gameObject.SetActive(true);
                 if(Input.GetKeyDown(KeyCode.E)){
-                    hit.transform.gameObject.SetActive(true);
+                    hit.transform.gameObject.GetComponent<JewelController>().SetJewel();
                 }
             }
             else{

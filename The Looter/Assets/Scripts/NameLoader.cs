@@ -7,10 +7,14 @@ public class NameLoader : MonoBehaviour{
     private List<string> selectedNames = new List<string>();
     public TextMeshPro[] bookTexts;
 
-    void Start(){
+    void Awake() {
         LoadNamesFromJson();
         AssignNamesToTombs();
         AssignNamesToBook();
+        
+    }
+
+    void Start(){
     }
 
     void LoadNamesFromJson(){
@@ -56,6 +60,10 @@ public class NameLoader : MonoBehaviour{
             list[i] = list[rnd];
             list[rnd] = temp;
         }
+    }
+
+    public int GetBooks(){
+        return bookTexts.Length;
     }
 }
 
