@@ -28,6 +28,10 @@ public class GameController : MonoBehaviour{
         }
     }
 
+    public bool GetWinner(){
+        return winner;
+    }
+
 
     void Start(){
                 // Obtener los componentes TextMeshPro en el objeto "book"

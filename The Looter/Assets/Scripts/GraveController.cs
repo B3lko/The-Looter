@@ -20,16 +20,26 @@ public class GraveController : MonoBehaviour{
             pala.transform.DORotate(new Vector3(45, 0, 0), 1f);
             pala.transform.DOMove(new Vector3(transform.position.x + 1,transform.position.y - 0.3f, transform.position.z),1.0f).OnComplete(() => {
                 paladaSFX.Play();
-                pala.transform.DOMove(new Vector3(transform.position.x - 1,transform.position.y + 0.3f, transform.position.z),0.5f);
-                transform.DOScaleY(scale, 0.5f).OnComplete(() => {
-                    scale -= 0.5f;
-                    if(scale == 0){
-                        gameObject.SetActive(false);
-                    }
-                    else{
-                        isPalading = false;
-                    }
+                pala.transform.DOMove(new Vector3(transform.position.x - 1,transform.position.y + 0.3f, transform.position.z),0.5f).OnComplete(() => {
+                    pala.SetActive(false);
                 });
+
+                if(transform.localScale.y == 0.5f){
+                    transform.DOMoveY(transform.position.y - 0.25f, 0.5f).OnComplete(() => {
+                        gameObject.tag = "Untagged";
+                        transform.parent.GetChild(0).GetChild(0).GetComponent<CoffinController>().SetReady();
+                        if(transform.parent.GetChild(7) != null){
+                            transform.parent.GetChild(7).GetComponent<JewelController>().SetReady();
+                        }
+                    });
+                }
+                else{
+                    transform.DOMoveY(transform.position.y - 0.05f, 0.5f);
+                    transform.DOScaleY(scale, 0.5f).OnComplete(() => {
+                        scale -= 0.5f;
+                        isPalading = false;
+                    });
+                }
             });
         }
     }

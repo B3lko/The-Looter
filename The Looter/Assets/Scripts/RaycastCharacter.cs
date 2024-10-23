@@ -22,6 +22,8 @@ public class Raycast : MonoBehaviour{
         textsString.Add("Coffin", "Press 'E' to open the coffin");
         textsString.Add("Jewel", "Press 'E' to pick the jewel");
         textsString.Add("Wall", "I'm not leaving without looting first");
+        textsString.Add("Wheel1", "I'm not leaving without looting first");
+        textsString.Add("Wheel2", "Leave");
         //textsString.Add("Tomb", "I'm not leaving without looting first");
     }
 
@@ -56,8 +58,10 @@ public class Raycast : MonoBehaviour{
                 }
             }
             else if(hit.transform.gameObject.tag == "Coffin"){
-                text.text = textsString["Coffin"];
-                text.gameObject.SetActive(true);
+                if(hit.transform.gameObject.GetComponent<CoffinController>().GetReady()){
+                    text.text = textsString["Coffin"];
+                    text.gameObject.SetActive(true);
+                }
                 if(Input.GetKeyDown(KeyCode.E)){
                     hit.transform.gameObject.GetComponent<CoffinController>().DoRotate();
                 }
@@ -82,6 +86,14 @@ public class Raycast : MonoBehaviour{
                 text.gameObject.SetActive(true);
                 if(Input.GetKeyDown(KeyCode.E)){
                     hit.transform.gameObject.GetComponent<JewelController>().SetJewel();
+                }
+            }
+            else if(hit.transform.gameObject.tag == "Wheel"){
+                text.text = textsString["Wheel2"];
+                text.gameObject.SetActive(true);
+                if(Input.GetKeyDown(KeyCode.E)){
+                   // if()
+                    //hit.transform.gameObject.GetComponent<JewelController>().SetJewel();
                 }
             }
             else{

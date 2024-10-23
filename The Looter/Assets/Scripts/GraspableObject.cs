@@ -21,6 +21,7 @@ public class GraspableObject : MonoBehaviour{
             isPicked = true;
             pickSFX.Play();
             player.GetComponent<PlayerInventory>().AddString(name);
+            gameObject.tag = "Untagged";
             DOVirtual.DelayedCall(pickSFX.clip.length, () => {
                 gameObject.SetActive(false);
             });

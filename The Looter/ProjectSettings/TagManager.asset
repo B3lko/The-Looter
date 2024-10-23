@@ -12,6 +12,7 @@ TagManager:
   - Tomb
   - Jewel
   - Book
+  - Wheel
   layers:
   - Default
   - TransparentFX
