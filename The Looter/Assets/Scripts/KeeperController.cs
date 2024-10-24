@@ -4,43 +4,57 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class KeeperController : MonoBehaviour{
-  public Transform[] patrolPoints;
+    [SerializeField] GameObject gController;
+     public Transform[] patrolPoints;
     public Transform player;
     public float detectionRange = 10f;
 
     private NavMeshAgent agent;
     private int currentPointIndex = 0;
+    private Animator animator;
+    private bool isEnd = false;
 
-    void Start()
-    {
+    void Start(){
         agent = GetComponent<NavMeshAgent>();
         MoveToNextPoint();
+        animator = transform.GetChild(0).gameObject.GetComponent<Animator>();
     }
 
-    void Update()
-    {
-        float distanceToPlayer = Vector3.Distance(player.position, transform.position);
+    public void SetAnimationFinish(){
+        animator.SetBool("canPunch", true);
+        isEnd = true;
+    }
 
-        if (distanceToPlayer <= detectionRange)
-        {
-            // Perseguir al jugador
-            agent.SetDestination(player.position);
-        }
-        else
-        {
-            // Patrullar si el jugador está fuera del rango
-            if (!agent.pathPending && agent.remainingDistance < 0.5f)
-            {
-                MoveToNextPoint();
+    void Update(){
+        if(!isEnd){
+            float distanceToPlayer = Vector3.Distance(player.position, transform.position);
+            if (distanceToPlayer <= detectionRange){
+                agent.SetDestination(player.position);
+            }
+            else{
+                // Patrullar si el jugador está fuera del rango
+                if (!agent.pathPending && agent.remainingDistance < 0.5f){
+                    MoveToNextPoint();
+                }
             }
         }
+        else{
+            CheeckAnimation();
+        }
     }
 
-    void MoveToNextPoint()
-    {
+
+    private void CheeckAnimation(){
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        if (stateInfo.IsName("Hook Punch") && stateInfo.normalizedTime >= 1.0f){
+            gController.GetComponent<LoseController>().SetAFinish();
+        }
+    }
+
+
+    void MoveToNextPoint(){
         if (patrolPoints.Length == 0)
             return;
-
         agent.SetDestination(patrolPoints[currentPointIndex].position);
         currentPointIndex = (currentPointIndex + 1) % patrolPoints.Length;
     }

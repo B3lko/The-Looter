@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour{
     public float moveSpeed = 5.0f;
     private float verticalRotation = 0;
     Vector3 moveDirection;
+    private bool canMove = true;
 
     void Awake() {
         _player = GetComponent<CharacterController>(); 
@@ -73,6 +74,17 @@ public class PlayerController : MonoBehaviour{
             }
         }
 
+        if(canMove){
+            Movement();
+        }
+        
+    }
+
+    public void SetMove(bool can){
+        canMove = can;
+    }
+
+    private void Movement(){
         // Movimiento del ratón
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
