@@ -8,6 +8,7 @@ public class KeeperController : MonoBehaviour{
      public Transform[] patrolPoints;
     public Transform player;
     public float detectionRange = 10f;
+    public float loseRange = 1f;
 
     private NavMeshAgent agent;
     private int currentPointIndex = 0;
@@ -30,6 +31,9 @@ public class KeeperController : MonoBehaviour{
             float distanceToPlayer = Vector3.Distance(player.position, transform.position);
             if (distanceToPlayer <= detectionRange){
                 agent.SetDestination(player.position);
+                /*if(distanceToPlayer <= loseRange){
+                    gController.GetComponent<LoseController>().StartFinishLoser();
+                }*/
             }
             else{
                 // Patrullar si el jugador está fuera del rango

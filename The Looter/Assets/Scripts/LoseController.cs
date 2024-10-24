@@ -16,10 +16,11 @@ public class LoseController : MonoBehaviour{
         //black.
         
         player.GetComponent<PlayerController>().SetMove(false);
+        player.transform.GetChild(0).transform.localRotation = Quaternion.Euler(10, transform.localRotation.y, transform.localRotation.z);
         keeper.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
         keeper.transform.SetParent(player.transform);
-        keeper.transform.localPosition = new Vector3(0, -0.05f, 1.3f);
-        keeper.transform.localRotation = Quaternion.Euler(0, 180, 0);
+        keeper.transform.localPosition = new Vector3(0, 0, 1.1f); //1.3f
+        keeper.transform.localRotation = Quaternion.Euler(-10, 180, 0);
         keeper.transform/*.GetChild(0).gameObject*/.GetComponent<KeeperController>().SetAnimationFinish();
     }
 
