@@ -29,7 +29,10 @@ public class JewelController : MonoBehaviour{
 
 
     public void SetJewel(){
+        Debug.Log("ASD33");
         if(isReady){
+        Debug.Log("ASD77");
+
             bk.GetComponent<BookController>().fede(gameObject.transform.parent.GetChild(6).GetComponent<TombController>().GetName());
             GameCont.GetComponent<GameController>().AddJewel();
             Destroy(gameObject);

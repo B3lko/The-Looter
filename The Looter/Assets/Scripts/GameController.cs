@@ -17,7 +17,7 @@ public class GameController : MonoBehaviour{
     [SerializeField] GameObject Door1;
     [SerializeField] GameObject Door2;
     [SerializeField] int cantJewels;
-    [SerializeField] GameObject JewelPrefab;
+    [SerializeField] GameObject[] JewelPrefabs;
     public GameObject book;
     private int currentJewels = 0;
     private bool winner = false;
@@ -38,7 +38,13 @@ public class GameController : MonoBehaviour{
 
     void Start(){
 
-        black.DOFade(0, 2);
+        black.DOFade(0, 2).OnComplete(() => {
+            black.gameObject.SetActive(false);
+            Color color;
+            color = black.color;
+            color.a = 1;
+            black.color = color;
+        });
                 // Obtener los componentes TextMeshPro en el objeto "book"
         TextMeshPro[] bookTexts = book.GetComponentsInChildren<TextMeshPro>();
         // Iterar sobre cada texto en el libro
@@ -52,7 +58,14 @@ public class GameController : MonoBehaviour{
                 Debug.Log("masdasdsa");
                 ///Instantiate(JewelPrefab, matchingTomb.transform.Find("Coffin1").transform.position, Quaternion.identity, matchingTomb.transform);
                 //Instantiate(JewelPrefab, matchingTomb.transform.GetChild(0).transform.position, Quaternion.identity, matchingTomb.transform);
-                Instantiate(JewelPrefab, matchingTomb.transform.parent.transform.GetChild(0).transform.position, Quaternion.identity, matchingTomb.transform.parent);
+                //Instantiate(JewelPrefabs[0], matchingTomb.transform.parent.transform.GetChild(0).transform.position, Quaternion.identity, matchingTomb.transform.parent);
+                int jewelIndex = Random.Range(0, 4);
+                GameObject newJewel = Instantiate(JewelPrefabs[jewelIndex], matchingTomb.transform.parent.GetChild(0).position, Quaternion.identity, matchingTomb.transform.parent);
+                newJewel.transform.SetSiblingIndex(7);
+                if(jewelIndex == 0){
+                    newJewel.transform.localPosition = new Vector3(-0.761f, 1.312f, 0);
+                    newJewel.transform.localRotation = Quaternion.Euler(0, -90, 0);
+                }
             }
         }
     }
@@ -84,11 +97,12 @@ public class GameController : MonoBehaviour{
     }
 
 
-    private void SpawnJewels(){
+    /*private void SpawnJewels(){
 
         for(int i = 0; i < cantJewels; i++){
-            GameObject aux = Instantiate(JewelPrefab, transform.position, transform.rotation);
+            int jewelIndex = Random.Range(1, 5);
+            GameObject aux = Instantiate(JewelPrefabs[jewelIndex], transform.position, transform.rotation);
 
         }
-    }
+    }*/
 }
