@@ -4,6 +4,7 @@ using TMPro;
 using DG.Tweening;
 
 public class Raycast : MonoBehaviour{
+    public GameObject gController;
     float maxDistance = 4f;
     public TextMeshProUGUI text;
     [SerializeField] TextMeshProUGUI textDown;
@@ -89,11 +90,15 @@ public class Raycast : MonoBehaviour{
                 }
             }
             else if(hit.transform.gameObject.tag == "Wheel"){
-                text.text = textsString["Wheel2"];
                 text.gameObject.SetActive(true);
-                if(Input.GetKeyDown(KeyCode.E)){
-                   // if()
-                    //hit.transform.gameObject.GetComponent<JewelController>().SetJewel();
+                if(gController.GetComponent<GameController>().GetWinner()){
+                    text.text = textsString["Wheel2"];
+                    if(Input.GetKeyDown(KeyCode.E)){
+                        hit.transform.gameObject.GetComponent<WheelController>().SetTransition();
+                    }
+                }
+                else{
+                    text.text = textsString["Wheel1"];
                 }
             }
             else{

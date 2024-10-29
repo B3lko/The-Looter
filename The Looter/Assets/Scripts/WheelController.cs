@@ -6,10 +6,17 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class WheelController : MonoBehaviour{
+    [SerializeField] GameObject keeper;
+    [SerializeField] GameObject lightCar1;
+    [SerializeField] GameObject lightCar2;
     [SerializeField] GameObject player;
     [SerializeField] GameObject car;
     public Image black;
+    public Image cross1;
+    public Image cross2;
     Color color;
+    private bool isRotting = false;
+    private bool isBack = false;
 
     // Start is called before the first frame update
     void Start(){
@@ -22,18 +29,65 @@ public class WheelController : MonoBehaviour{
         if(Input.GetKeyDown(KeyCode.M)){
             FinishGame();
         }  
+        if(isRotting){
+            rotWheels(isBack);
+        }
     }
 
 
-    public void FinishGame(){
+    private void rotWheels(bool back){
+        if(back){
+            car.transform.GetChild(5).transform.Rotate(0, 0, 1, Space.Self);
+            car.transform.GetChild(6).transform.Rotate(0, 0, 1, Space.Self);
+            car.transform.GetChild(9).transform.Rotate(0, 0, 1, Space.Self);
+            car.transform.GetChild(10).transform.Rotate(0, 0, 1, Space.Self);
+        }
+        else{
+            car.transform.GetChild(5).transform.Rotate(0, 0, -1, Space.Self);
+            car.transform.GetChild(6).transform.Rotate(0, 0, -1, Space.Self);
+            car.transform.GetChild(9).transform.Rotate(0, 0, -1, Space.Self);
+            car.transform.GetChild(10).transform.Rotate(0, 0, -1, Space.Self);
+        }
+    }
+
+
+    public void SetTransition(){
+        black.color = color;
+        black.gameObject.SetActive(true);
+
         player.GetComponent<PlayerController>().SetMove(false);
-        player.transform.position = new Vector3(-6, 2, -50);
-        player.transform.localRotation = Quaternion.Euler(0, -260, 0);
-        player.transform.GetChild(0).transform.localRotation = Quaternion.Euler(0, 0, 0);
+        keeper.SetActive(false);
+
+        black.DOFade(1, 2).OnComplete(() => {
+
+            cross1.gameObject.SetActive(false);
+            cross2.gameObject.SetActive(false);
+            car.transform.GetChild(4).transform.localRotation = Quaternion.Euler(-90, 0, 0);
+            car.transform.GetChild(12).transform.localRotation = Quaternion.Euler(-90, 0, 0);
+            lightCar1.SetActive(true);
+            lightCar2.SetActive(true);
+            player.transform.position = new Vector3(-6, 2, -50);
+            player.transform.localRotation = Quaternion.Euler(0, -260, 0);
+            player.transform.GetChild(0).transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            black.DOFade(0, 2).OnComplete(() => {
+                FinishGame();
+            });
+        });
+    }
+
+    public void FinishGame(){
+        
+
+        isRotting = true;
+        isBack = true;
 
         car.transform.DOLocalRotate(new Vector3(car.transform.localEulerAngles.x, car.transform.localEulerAngles.y + 100, car.transform.localEulerAngles.z), 3, RotateMode.FastBeyond360).SetEase(Ease.InSine);
         car.transform.DOMoveZ(car.transform.position.z + 5.5f, 3).SetEase(Ease.InQuart);
         car.transform.DOMoveX(car.transform.position.x - 4, 3).OnComplete(() => {
+
+            isBack = false;
+
             player.transform.DOLocalRotate( new Vector3 (player.transform.localEulerAngles.x, player.transform.localEulerAngles.y + 60, player.transform.localEulerAngles.z), 5, RotateMode.FastBeyond360).SetEase(Ease.InSine);
             car.transform.DOLocalRotate(new Vector3(car.transform.localEulerAngles.x, car.transform.localEulerAngles.y + 90, car.transform.localEulerAngles.z), 5, RotateMode.FastBeyond360).SetEase(Ease.InSine);
             car.transform.DOMoveZ(car.transform.position.z - 6.5f, 5);//.SetEase(Ease.InQuart);

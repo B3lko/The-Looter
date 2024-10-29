@@ -63,8 +63,16 @@ public class GameController : MonoBehaviour{
                 GameObject newJewel = Instantiate(JewelPrefabs[jewelIndex], matchingTomb.transform.parent.GetChild(0).position, Quaternion.identity, matchingTomb.transform.parent);
                 newJewel.transform.SetSiblingIndex(7);
                 if(jewelIndex == 0){
-                    newJewel.transform.localPosition = new Vector3(-0.761f, 1.312f, 0);
+                    newJewel.transform.localPosition = new Vector3(-0.761f, 1.35f, 0);
                     newJewel.transform.localRotation = Quaternion.Euler(0, -90, 0);
+                }
+                else if(jewelIndex == 2){
+                    newJewel.transform.localPosition = new Vector3(0, 1.312f, 0.2f);
+                    newJewel.transform.localRotation = Quaternion.Euler(280, 90, 0);
+                }
+                else if(jewelIndex == 3){
+                    newJewel.transform.localPosition = new Vector3(0.25f, 1.25f, 0f);
+                    newJewel.transform.localRotation = Quaternion.Euler(90, 0, 0);
                 }
             }
         }
