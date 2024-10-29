@@ -4,10 +4,14 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class KeeperController : MonoBehaviour{
+    [SerializeField] AudioSource Heart1;
+    [SerializeField] AudioSource Heart2;
     [SerializeField] GameObject gController;
      public Transform[] patrolPoints;
     public Transform player;
-    public float detectionRange = 10f;
+    public float detectionRange = 13f;
+    public float heart1Range = 10f;
+    public float heart2Range = 5f;
     public float loseRange = 1f;
 
     private NavMeshAgent agent;
@@ -31,9 +35,18 @@ public class KeeperController : MonoBehaviour{
             float distanceToPlayer = Vector3.Distance(player.position, transform.position);
             if (distanceToPlayer <= detectionRange){
                 agent.SetDestination(player.position);
-                /*if(distanceToPlayer <= loseRange){
+
+                if(distanceToPlayer > heart1Range){
+                    if(!Heart1.isPlaying && !Heart2.isPlaying){Heart1.Play();}
+                }
+
+                else if(distanceToPlayer > heart2Range){
+                    if(!Heart2.isPlaying && !Heart1.isPlaying){Heart2.Play();}
+                }
+
+                if(distanceToPlayer <= loseRange){
                     gController.GetComponent<LoseController>().StartFinishLoser();
-                }*/
+                }
             }
             else{
                 // Patrullar si el jugador está fuera del rango

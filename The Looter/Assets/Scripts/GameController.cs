@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using DG.Tweening;
 using TMPro;
 
 public class GameController : MonoBehaviour{
@@ -9,6 +11,7 @@ public class GameController : MonoBehaviour{
     //Spawnearlos
     //Controlar el progreso a medida que se agarran
 
+    public Image black;
 
     //
     [SerializeField] GameObject Door1;
@@ -34,6 +37,8 @@ public class GameController : MonoBehaviour{
 
 
     void Start(){
+
+        black.DOFade(0, 2);
                 // Obtener los componentes TextMeshPro en el objeto "book"
         TextMeshPro[] bookTexts = book.GetComponentsInChildren<TextMeshPro>();
         // Iterar sobre cada texto en el libro

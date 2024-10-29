@@ -30,7 +30,7 @@ public class Raycast : MonoBehaviour{
     void Update(){
         RaycastHit hit;
         Ray ray = new Ray(transform.position, transform.forward);
-        //Debug.DrawRay(ray.origin, ray.direction * maxDistance, Color.red);
+        Debug.DrawRay(ray.origin, ray.direction * maxDistance, Color.red);
 
         if(Physics.Raycast(ray, out hit, maxDistance)){
             if(hit.transform.gameObject.tag == "Door"){
