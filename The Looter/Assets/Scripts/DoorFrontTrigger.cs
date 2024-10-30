@@ -3,6 +3,9 @@ using UnityEngine;
 public class DoorFrontTrigger : MonoBehaviour{
     [SerializeField] GameObject Door1;
     [SerializeField] GameObject Door2;
+    [SerializeField] GameObject Keeper;
+    [SerializeField] GameObject posKeeper;
+
 
     void OnTriggerExit(Collider other){
         if(other.gameObject.tag == "Player"){
@@ -22,6 +25,12 @@ public class DoorFrontTrigger : MonoBehaviour{
             else{
                 Door2.GetComponent<DoorController>().SetState(3);
             }
+
+            int randomIndex = Random.Range(0, posKeeper.transform.childCount);
+            Transform randomChild = posKeeper.transform.GetChild(randomIndex);
+            Keeper.transform.position = randomChild.position;
+            Keeper.SetActive(true);
+
             Destroy(gameObject);
         }
     }

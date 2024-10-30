@@ -16,6 +16,8 @@ public class GameController : MonoBehaviour{
     //
     [SerializeField] GameObject Door1;
     [SerializeField] GameObject Door2;
+    [SerializeField] GameObject player;
+    [SerializeField] GameObject playerSpawn;
     [SerializeField] int cantJewels;
     [SerializeField] GameObject[] JewelPrefabs;
     public GameObject book;
@@ -37,7 +39,7 @@ public class GameController : MonoBehaviour{
 
 
     void Start(){
-
+        player.transform.position = playerSpawn.transform.position;
         black.DOFade(0, 2).OnComplete(() => {
             black.gameObject.SetActive(false);
             Color color;
