@@ -25,6 +25,9 @@ public class Raycast : MonoBehaviour{
         textsString.Add("Wall", "I'm not leaving without looting first");
         textsString.Add("Wheel1", "I'm not leaving without looting first");
         textsString.Add("Wheel2", "Leave");
+        textsString.Add("DoorKey1", "You need a key to open this door");
+        textsString.Add("DoorKey2", "Press 'E' to open the door");
+        textsString.Add("TombDoorWall", "Press 'E' to open the tomb door");
         //textsString.Add("Tomb", "I'm not leaving without looting first");
     }
 
@@ -89,6 +92,19 @@ public class Raycast : MonoBehaviour{
                     hit.transform.gameObject.GetComponent<JewelController>().SetJewel();
                 }
             }
+            else if(hit.transform.gameObject.tag == "CloseDoor"){
+                text.gameObject.SetActive(true);
+                if(hit.transform.parent.gameObject.GetComponent<DoorLockedKey>().CanOpen()){
+                    text.text = textsString["DoorKey2"];
+                    if(Input.GetKeyDown(KeyCode.E)){
+                        hit.transform.parent.gameObject.GetComponent<DoorLockedKey>().OpenDoor();
+                    }
+                }
+                else{
+                    text.text = textsString["DoorKey1"];
+                }
+               
+            }
             else if(hit.transform.gameObject.tag == "Wheel"){
                 text.gameObject.SetActive(true);
                 if(gController.GetComponent<GameController>().GetWinner()){
@@ -99,6 +115,27 @@ public class Raycast : MonoBehaviour{
                 }
                 else{
                     text.text = textsString["Wheel1"];
+                }
+            }
+            else if(hit.transform.gameObject.tag == "TombWallDoor"){
+                text.text = textsString["TombDoorWall"];
+                text.gameObject.SetActive(true);
+                if(Input.GetKeyDown(KeyCode.E)){
+                    hit.transform.gameObject.GetComponent<WallTombController>().Open();
+                }
+            }
+            else if(hit.transform.gameObject.tag == "Coffin2"){
+                if( hit.transform.gameObject.GetComponent<WallCoffinController>().GetIndex() == 0){
+                    text.text = textsString["TombDoorWall"];
+                }
+                else{
+                    text.text = textsString["Coffin"];
+                }
+                if(!hit.transform.gameObject.GetComponent<WallCoffinController>().isInAction()){
+                    text.gameObject.SetActive(true);
+                }
+                if(Input.GetKeyDown(KeyCode.E)){
+                    hit.transform.gameObject.GetComponent<WallCoffinController>().DoAction();
                 }
             }
             else{

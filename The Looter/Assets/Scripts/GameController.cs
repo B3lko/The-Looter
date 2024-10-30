@@ -63,28 +63,45 @@ public class GameController : MonoBehaviour{
                 //Instantiate(JewelPrefabs[0], matchingTomb.transform.parent.transform.GetChild(0).transform.position, Quaternion.identity, matchingTomb.transform.parent);
                 int jewelIndex = Random.Range(0, 4);
                 GameObject newJewel = Instantiate(JewelPrefabs[jewelIndex], matchingTomb.transform.parent.GetChild(0).position, Quaternion.identity, matchingTomb.transform.parent);
-                newJewel.transform.SetSiblingIndex(7);
-                if(jewelIndex == 0){
-                    newJewel.transform.localPosition = new Vector3(-0.761f, 1.35f, 0);
-                    newJewel.transform.localRotation = Quaternion.Euler(0, -90, 0);
+                if(!matchingTomb.GetComponent<TombController>().isWall){
+                    newJewel.transform.SetSiblingIndex(7);
+                    if(jewelIndex == 0){
+                        newJewel.transform.localPosition = new Vector3(-0.761f, 1.35f, 0);
+                        newJewel.transform.localRotation = Quaternion.Euler(0, -90, 0);
+                    }
+                    else if(jewelIndex == 2){
+                        newJewel.transform.localPosition = new Vector3(0, 1.312f, 0.2f);
+                        newJewel.transform.localRotation = Quaternion.Euler(280, 90, 0);
+                    }
+                    else if(jewelIndex == 3){
+                        newJewel.transform.localPosition = new Vector3(0.25f, 1.25f, 0f);
+                        newJewel.transform.localRotation = Quaternion.Euler(90, 0, 0);
+                    }
                 }
-                else if(jewelIndex == 2){
-                    newJewel.transform.localPosition = new Vector3(0, 1.312f, 0.2f);
-                    newJewel.transform.localRotation = Quaternion.Euler(280, 90, 0);
-                }
-                else if(jewelIndex == 3){
-                    newJewel.transform.localPosition = new Vector3(0.25f, 1.25f, 0f);
-                    newJewel.transform.localRotation = Quaternion.Euler(90, 0, 0);
+                else{
+                    newJewel.transform.parent = newJewel.transform.parent.transform.GetChild(0);
+                    if(jewelIndex == 0){
+                        newJewel.transform.localPosition = new Vector3(0, 0.04f, -0.785f);
+                        newJewel.transform.localRotation = Quaternion.Euler(180, 0, 0);
+                    }
+                    else if(jewelIndex == 2){
+                        newJewel.transform.localPosition = new Vector3(0, 0.09f, 0.2f);
+                        newJewel.transform.localRotation = Quaternion.Euler(-90, 0, 0);
+                    }
+                    else if(jewelIndex == 3){
+                        newJewel.transform.localPosition = new Vector3(0.25f, 0.05f, 0f);
+                        newJewel.transform.localRotation = Quaternion.Euler(90, 0, 0);
+                    }
                 }
             }
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+
+    void Update(){
+        //GameData.Instance.UpdatePlayTime(Time.deltaTime);
     }
+
 
 
      // Método para encontrar la tumba que tiene el mismo nombre

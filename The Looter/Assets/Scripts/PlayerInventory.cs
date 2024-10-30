@@ -11,10 +11,23 @@ public class PlayerInventory : MonoBehaviour{
     [SerializeField] GameObject Door2;
     [SerializeField] TextMeshProUGUI text;
     [SerializeField] GameObject book;
+    private int keyIndex = 1;
 
 
+    public bool hasAKey(string keyName){
+        for(int i = 0; i < stringList.Count; i++){
+            if(stringList[i] == keyName){
+                return true;
+            }
+        }
+        return false;
+    }
 
     public void AddString(string newString){
+        if(newString == "Key"){
+            newString += keyIndex;
+            keyIndex += 1;
+        }
         stringList.Add(newString);
         Debug.Log("Agregado: " + newString);
         if(stringList.Count == 3){

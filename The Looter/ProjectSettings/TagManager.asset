@@ -13,6 +13,9 @@ TagManager:
   - Jewel
   - Book
   - Wheel
+  - CloseDoor
+  - TombWallDoor
+  - Coffin2
   layers:
   - Default
   - TransparentFX
