@@ -8,6 +8,7 @@ public class GameData : MonoBehaviour{
 
     // Variables para almacenar datos de la partida
     public float playTime;
+    public string ending;
     public int collectedItems;
     public int collectedKeys;
     public int collectedJewels;
@@ -49,5 +50,9 @@ public class GameData : MonoBehaviour{
 
     public void CollectGreat(){
         collectedGreat = true;
+    }
+
+    public void SetEnding(string end){
+        ending = end;
     }
 }

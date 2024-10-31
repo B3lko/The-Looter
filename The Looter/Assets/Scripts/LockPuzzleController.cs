@@ -6,9 +6,10 @@ using DG.Tweening;
 
 public class LockPuzzleController : MonoBehaviour{
     public Image Background;
-    public TextMeshProUGUI positionAText;
-    public TextMeshProUGUI positionBText;
-    public TextMeshProUGUI positionCText;
+    public GameObject Lock;
+    public TextMeshPro positionAText;
+    public TextMeshPro positionBText;
+    public TextMeshPro positionCText;
     public TextMeshProUGUI WrongText;
     public GameObject player;
     private int positionA = 0;
@@ -44,6 +45,7 @@ public class LockPuzzleController : MonoBehaviour{
     public void ActivatePuzzleMode(){
         player.GetComponent<PlayerController>().offBookFlash();
         Background.gameObject.SetActive(true);
+        Lock.SetActive(true);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         player.GetComponent<PlayerController>().SetMove(false);
@@ -54,6 +56,7 @@ public class LockPuzzleController : MonoBehaviour{
         Cursor.lockState = CursorLockMode.Locked;
         player.GetComponent<PlayerController>().SetMove(true);
         Background.gameObject.SetActive(false);
+        Lock.SetActive(false);
     }
 
     public void IncreasePositionA()

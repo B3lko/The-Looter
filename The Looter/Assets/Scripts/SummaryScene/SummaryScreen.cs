@@ -1,23 +1,42 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
+using DG.Tweening;
 public class SummaryScreen : MonoBehaviour{
+    [SerializeField] TextMeshProUGUI endingText;
     [SerializeField] TextMeshProUGUI playTimeText;
     [SerializeField] TextMeshProUGUI collectedKeysText;
     [SerializeField] TextMeshProUGUI lootedTombsText;
     [SerializeField] TextMeshProUGUI GreatText;
+    [SerializeField] Image black2;
 
     void Start(){
+        black2.DOFade(0, 2).OnComplete(() => {
+            black2.gameObject.SetActive(false);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        });
         PlayTime();
-        collectedKeysText.text = "collected keys: " + GameData.Instance.collectedKeys + " / 4";
-        lootedTombsText.text = "looted tombs: " + GameData.Instance.collectedJewels + " / 8";
+        collectedKeysText.text = GameData.Instance.collectedKeys + " / 4";
+        lootedTombsText.text = GameData.Instance.collectedJewels + " / 8";
         if(GameData.Instance.collectedGreat){
-            GreatText.text = "great stolen gem: yes";
+            GreatText.text = "yes";
         }
         else{
-            GreatText.text = "great stolen gem: no";
+            GreatText.text = "no";
         }
+        endingText.text = GameData.Instance.ending;
+
        // collectedItemsText.text = "Objetos recolectados: " + GameData.Instance.collectedItems;
+    }
+
+    public void GoMenu(){
+        black2.gameObject.SetActive(true);
+        black2.DOFade(1, 2).OnComplete(() => {
+            SceneManager.LoadScene("MainMenu");
+        });
+
     }
 
     private void PlayTime(){
@@ -28,10 +47,10 @@ public class SummaryScreen : MonoBehaviour{
         int seconds = (int)(playTime % 60);
         // Actualizar los textos con los datos recopilados
         if (hours > 0){
-            playTimeText.text = "game time: " + string.Format("{0:D2}hs {1:D2}m {2:D2}s", hours, minutes, seconds);
+            playTimeText.text = string.Format("{0:D2}hs {1:D2}m {2:D2}s", hours, minutes, seconds);
         }
         else{
-            playTimeText.text = "game time: " + string.Format("{0:D2}m {1:D2}s", minutes, seconds);
+            playTimeText.text = string.Format("{0:D2}m {1:D2}s", minutes, seconds);
         }
     }
 }

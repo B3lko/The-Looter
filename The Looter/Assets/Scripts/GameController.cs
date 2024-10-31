@@ -100,7 +100,7 @@ public class GameController : MonoBehaviour{
 
 
     void Update(){
-        //GameData.Instance.UpdatePlayTime(Time.deltaTime);
+        GameData.Instance.UpdatePlayTime(Time.deltaTime);
         if(Input.GetKeyDown(KeyCode.C)){
             SceneManager.LoadScene("SummaryScene");
         }

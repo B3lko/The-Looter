@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class LoseController : MonoBehaviour{
     [SerializeField] GameObject black;
@@ -26,6 +28,11 @@ public class LoseController : MonoBehaviour{
 
     public void SetAFinish(){
         black.SetActive(true);
+        transform.DOScale(1, 2).OnComplete(() => {
+            GameData.Instance.SetEnding("trapped");
+            SceneManager.LoadScene("SummaryScene");
+        });
+
     }
 
 }

@@ -15,11 +15,13 @@ public class PlayerController : MonoBehaviour{
     private bool isFlashOn = false; 
     private bool isBookOn = false; 
     private CharacterController _player;
-    [SerializeField] private float _moveSpeed, _gravity, _fallVelocity, _jumpForce;
+    [SerializeField] private float _gravity, _fallVelocity, _jumpForce;
     private Vector3 _axis, _movePlayer;
     public float mouseSensitivity = 200f;
     public Transform playerBody;
-    public float moveSpeed = 5.0f;
+    private float walkSpeed = 2.0f;
+    private float runSpeed = 3.0f;
+    private float _moveSpeed = 0;
     private float verticalRotation = 0;
     Vector3 moveDirection;
     private bool canMove = true;
@@ -95,6 +97,12 @@ public class PlayerController : MonoBehaviour{
     }
 
     private void Movement(){
+        MouseMovement();
+        KeyboardMovement();
+    }
+
+
+    private void MouseMovement(){
         // Movimiento del ratón
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
@@ -104,23 +112,40 @@ public class PlayerController : MonoBehaviour{
 
         transform.Rotate(Vector3.up * mouseX);
         transform.GetChild(0).localRotation = Quaternion.Euler(verticalRotation, 0, 0); // Rotar la cámara hija
+    }
 
+
+    private void KeyboardMovement(){
         // Movimiento del teclado
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
         moveDirection = transform.right * moveHorizontal + transform.forward * moveVertical;
-        if (moveDirection.magnitude > 0){
+
+        
+        if(moveDirection.magnitude > 0){
+            Debug.Log("Nada");
+            if(Input.GetKey(KeyCode.LeftShift)){
+                Debug.Log("Corre");
+                _moveSpeed = runSpeed;
+            }
+            else{
+                Debug.Log("Camina");
+                _moveSpeed = walkSpeed;
+            }
+        }
+
+
+        /*if (moveDirection.magnitude > 0){
             if(!audioSource.isPlaying){
                 PlayFootstepSound();
             }
         }
         if(audioSource.isPlaying && moveDirection.magnitude < 0){
             audioSource.Stop();
-        }
+        }*/
         SetGravity();
-        moveDirection *= moveSpeed;
-
+        moveDirection *=  _moveSpeed;
         _player.Move(moveDirection * _moveSpeed * Time.deltaTime);
     }
 
