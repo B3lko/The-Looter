@@ -29,15 +29,14 @@ public class JewelController : MonoBehaviour{
 
 
     public void SetJewel(){
-        Debug.Log("ASD33");
         if(transform.parent.transform.parent.GetChild(1).GetComponent<TombController>().isWall){
             bk.GetComponent<BookController>().fede(gameObject.transform.parent.transform.parent.GetChild(1).GetComponent<TombController>().GetName());
             GameCont.GetComponent<GameController>().AddJewel();
+            GameData.Instance.CollectJewel();
             Destroy(gameObject);
         }
         if(isReady){
-        Debug.Log("ASD77");
-
+            GameData.Instance.CollectJewel();
             bk.GetComponent<BookController>().fede(gameObject.transform.parent.GetChild(6).GetComponent<TombController>().GetName());
             GameCont.GetComponent<GameController>().AddJewel();
             Destroy(gameObject);

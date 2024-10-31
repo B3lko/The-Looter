@@ -6,37 +6,37 @@ using UnityEngine.AI;
 public class DogController : MonoBehaviour{
     [SerializeField] AudioSource Heart1;
     [SerializeField] AudioSource Heart2;
-    [SerializeField] GameObject gController;
+    //[SerializeField] GameObject gController;
     public Transform[] patrolPoints;
     public Transform player;
     public float detectionRange = 13f;
-    public float heart1Range = 10f;
-    public float heart2Range = 5f;
-    public float loseRange = 1f;
+    //public float heart1Range = 10f;
+    //public float heart2Range = 5f;
+    //public float loseRange = 1f;
 
     private NavMeshAgent agent;
     private int currentPointIndex = 0;
-    private Animator animator;
+    //private Animator animator;
     private bool isEnd = false;
 
     void Start(){
         agent = GetComponent<NavMeshAgent>();
         MoveToNextPoint();
-        animator = transform.GetChild(0).gameObject.GetComponent<Animator>();
+        //animator = transform.GetChild(0).gameObject.GetComponent<Animator>();
     }
 
-    public void SetAnimationFinish(){
+    /*public void SetAnimationFinish(){
         animator.SetBool("canPunch", true);
         isEnd = true;
-    }
+    }*/
 
     void Update(){
         if(!isEnd){
             float distanceToPlayer = Vector3.Distance(player.position, transform.position);
             if (distanceToPlayer <= detectionRange){
                 agent.SetDestination(player.position);
-
-                if(distanceToPlayer > heart1Range){
+                if(!Heart1.isPlaying && !Heart2.isPlaying){Heart1.Play();}
+                /*if(distanceToPlayer > heart1Range){
                     if(!Heart1.isPlaying && !Heart2.isPlaying){Heart1.Play();}
                 }
 
@@ -46,7 +46,7 @@ public class DogController : MonoBehaviour{
 
                 if(distanceToPlayer <= loseRange){
                     gController.GetComponent<LoseController>().StartFinishLoser();
-                }
+                }*/
             }
             else{
                 // Patrullar si el jugador está fuera del rango
@@ -56,17 +56,17 @@ public class DogController : MonoBehaviour{
             }
         }
         else{
-            CheeckAnimation();
+           // CheeckAnimation();
         }
     }
 
 
-    private void CheeckAnimation(){
+    /*private void CheeckAnimation(){
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         if (stateInfo.IsName("Hook Punch") && stateInfo.normalizedTime >= 1.0f){
             gController.GetComponent<LoseController>().SetAFinish();
         }
-    }
+    }*/
 
 
     void MoveToNextPoint(){

@@ -31,7 +31,7 @@ public class WallCoffinController : MonoBehaviour
             if(indexAction == 0){
                 indexAction = 1;
                 inAction = true;
-                transform.DOMoveX(transform.position.x + 2, 2).OnComplete(() => {
+                transform.DOMoveX(transform.position.x - 2.2f, 2).OnComplete(() => {
                     inAction = false;
                 });
             }

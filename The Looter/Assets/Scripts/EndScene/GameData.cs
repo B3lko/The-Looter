@@ -9,6 +9,8 @@ public class GameData : MonoBehaviour{
     // Variables para almacenar datos de la partida
     public float playTime;
     public int collectedItems;
+    public int collectedKeys;
+    public int collectedJewels;
 
     void Awake(){
         // Asegurarnos de que solo haya una instancia de GameData
@@ -36,5 +38,11 @@ public class GameData : MonoBehaviour{
     // Método para recolectar un objeto
     public void CollectItem(){
         collectedItems++;
+    }
+    public void CollectKey(){
+        collectedKeys++;
+    }
+    public void CollectJewel(){
+        collectedJewels++;
     }
 }

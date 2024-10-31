@@ -51,9 +51,16 @@ public class PlayerController : MonoBehaviour{
         hasABook = has;
     }
 
+    public void offBookFlash(){
+        isFlashOn = false;
+        flashLigth.SetActive(isFlashOn);
+        isBookOn = false; 
+        book.SetActive(isBookOn);
+    }
+
 
     void Update(){
-        if(Input.GetKeyDown(KeyCode.F) && hasALigthFlash){
+        if(Input.GetKeyDown(KeyCode.F) && hasALigthFlash && canMove){
             isFlashOn = !isFlashOn; 
             flashLigth.SetActive(isFlashOn);
             if(isFlashOn){
@@ -63,7 +70,7 @@ public class PlayerController : MonoBehaviour{
                 flashLigthOff.Play();
             }
         }
-        if(Input.GetKeyDown(KeyCode.B) && hasABook){
+        if(Input.GetKeyDown(KeyCode.B) && hasABook && canMove){
            isBookOn = !isBookOn; 
             book.SetActive(isBookOn);
             if(isBookOn){

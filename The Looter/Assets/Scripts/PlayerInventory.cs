@@ -25,6 +25,7 @@ public class PlayerInventory : MonoBehaviour{
 
     public void AddString(string newString){
         if(newString == "Key"){
+            GameData.Instance.CollectKey();
             newString += keyIndex;
             keyIndex += 1;
         }

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour{
 
@@ -100,6 +101,9 @@ public class GameController : MonoBehaviour{
 
     void Update(){
         //GameData.Instance.UpdatePlayTime(Time.deltaTime);
+        if(Input.GetKeyDown(KeyCode.C)){
+            SceneManager.LoadScene("SummaryScene");
+        }
     }
 
 

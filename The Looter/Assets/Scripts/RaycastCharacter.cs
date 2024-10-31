@@ -138,6 +138,15 @@ public class Raycast : MonoBehaviour{
                     hit.transform.gameObject.GetComponent<WallCoffinController>().DoAction();
                 }
             }
+            else if(hit.transform.gameObject.tag == "PuzzleDoor"){
+                //text.text = textsString["Coffin"];
+               // if(!hit.transform.gameObject.GetComponent<WallCoffinController>().isInAction()){
+                //    text.gameObject.SetActive(true);
+               // }
+                if(Input.GetKeyDown(KeyCode.E)){
+                    hit.transform.gameObject.GetComponent<LockPuzzleController>().ActivatePuzzleMode();
+                }
+            }
             else{
                 text.gameObject.SetActive(false);
             }

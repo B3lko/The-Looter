@@ -39,7 +39,7 @@ public class SceneController : MonoBehaviour{
             black.DOFade(0, 2).OnComplete(() => {
                 cam2.transform.DOLocalRotate(new Vector3(cam2.transform.localEulerAngles.x, cam2.transform.localEulerAngles.y + 140, cam2.transform.localEulerAngles.z), 2, RotateMode.FastBeyond360).SetEase(Ease.InSine);
                 black.DOFade(1, 2).OnComplete(() => {
-                    SceneManager.LoadScene("MainMenu");
+                    SceneManager.LoadScene("SummaryScene");
                 });
             });
         }) ;
