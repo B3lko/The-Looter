@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 253835292}
   - component: {fileID: 253835291}
   m_Layer: 5
-  m_Name: Text (TMP) Datos (5)
+  m_Name: Text (TMP) great
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1211,6 +1211,7 @@ MonoBehaviour:
   playTimeText: {fileID: 1714760773}
   collectedKeysText: {fileID: 2092789160}
   lootedTombsText: {fileID: 1099081725}
+  GreatText: {fileID: 253835291}
 --- !u!4 &1873415940
 Transform:
   m_ObjectHideFlags: 0

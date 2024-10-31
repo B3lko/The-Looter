@@ -11,6 +11,7 @@ public class GameData : MonoBehaviour{
     public int collectedItems;
     public int collectedKeys;
     public int collectedJewels;
+    public bool collectedGreat = false;
 
     void Awake(){
         // Asegurarnos de que solo haya una instancia de GameData
@@ -44,5 +45,9 @@ public class GameData : MonoBehaviour{
     }
     public void CollectJewel(){
         collectedJewels++;
+    }
+
+    public void CollectGreat(){
+        collectedGreat = true;
     }
 }

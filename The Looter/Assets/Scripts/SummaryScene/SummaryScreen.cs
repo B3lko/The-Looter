@@ -5,12 +5,18 @@ public class SummaryScreen : MonoBehaviour{
     [SerializeField] TextMeshProUGUI playTimeText;
     [SerializeField] TextMeshProUGUI collectedKeysText;
     [SerializeField] TextMeshProUGUI lootedTombsText;
+    [SerializeField] TextMeshProUGUI GreatText;
 
     void Start(){
         PlayTime();
         collectedKeysText.text = "collected keys: " + GameData.Instance.collectedKeys + " / 4";
         lootedTombsText.text = "looted tombs: " + GameData.Instance.collectedJewels + " / 8";
-
+        if(GameData.Instance.collectedGreat){
+            GreatText.text = "great stolen gem: yes";
+        }
+        else{
+            GreatText.text = "great stolen gem: no";
+        }
        // collectedItemsText.text = "Objetos recolectados: " + GameData.Instance.collectedItems;
     }
 

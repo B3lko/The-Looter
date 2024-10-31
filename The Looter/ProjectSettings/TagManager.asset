@@ -17,6 +17,7 @@ TagManager:
   - TombWallDoor
   - Coffin2
   - PuzzleDoor
+  - Ground
   layers:
   - Default
   - TransparentFX

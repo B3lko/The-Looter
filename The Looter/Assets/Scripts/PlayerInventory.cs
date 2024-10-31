@@ -29,6 +29,9 @@ public class PlayerInventory : MonoBehaviour{
             newString += keyIndex;
             keyIndex += 1;
         }
+        if(newString == "Great"){
+            GameData.Instance.CollectGreat();
+        }
         stringList.Add(newString);
         Debug.Log("Agregado: " + newString);
         if(stringList.Count == 3){
