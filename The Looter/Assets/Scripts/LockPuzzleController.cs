@@ -17,6 +17,7 @@ public class LockPuzzleController : MonoBehaviour{
     private int positionA = 0;
     private int positionB = 0;
     private int positionC = 0;
+    public bool isActive = false;
 
     private int correctA = 1; // Código correcto para la posición A
     private int correctB = 5; // Código correcto para la posición B
@@ -45,6 +46,7 @@ public class LockPuzzleController : MonoBehaviour{
     }
 
     public void ActivatePuzzleMode(){
+        isActive = true;
         cross1.gameObject.SetActive(false);
         cross2.gameObject.SetActive(false);
         player.GetComponent<PlayerController>().offBookFlash();
@@ -56,6 +58,7 @@ public class LockPuzzleController : MonoBehaviour{
     }
 
     public void Leave(){
+        isActive = false;
         cross1.gameObject.SetActive(true);
         cross2.gameObject.SetActive(true);
         Cursor.visible = false;

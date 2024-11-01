@@ -28,6 +28,7 @@ public class Raycast : MonoBehaviour{
         textsString.Add("DoorKey1", "You need a key to open this door");
         textsString.Add("DoorKey2", "Press 'E' to open the door");
         textsString.Add("TombDoorWall", "Press 'E' to open the tomb door");
+        textsString.Add("puzzle", "Press 'E' to open the padlock");
         //textsString.Add("Tomb", "I'm not leaving without looting first");
     }
 
@@ -139,10 +140,13 @@ public class Raycast : MonoBehaviour{
                 }
             }
             else if(hit.transform.gameObject.tag == "PuzzleDoor"){
-                //text.text = textsString["Coffin"];
-               // if(!hit.transform.gameObject.GetComponent<WallCoffinController>().isInAction()){
-                //    text.gameObject.SetActive(true);
-               // }
+                text.text = textsString["puzzle"];
+                if(!hit.transform.gameObject.GetComponent<LockPuzzleController>().isActive){
+                    text.gameObject.SetActive(true);
+                }
+                else{
+                    text.gameObject.SetActive(false);
+                }
                 if(Input.GetKeyDown(KeyCode.E)){
                     hit.transform.gameObject.GetComponent<LockPuzzleController>().ActivatePuzzleMode();
                 }
