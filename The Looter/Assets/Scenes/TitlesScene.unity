@@ -2650,9 +2650,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84903fe4cc9bb4c4eb0bc4e88edef69a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  keeper: {fileID: 0}
+  lightCar1: {fileID: 0}
+  lightCar2: {fileID: 0}
   player: {fileID: 0}
   car: {fileID: 1234346091}
   black: {fileID: 128228207}
+  cross1: {fileID: 0}
+  cross2: {fileID: 0}
 --- !u!65 &309553259
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15441,7 +15446,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8fdd0515bc5ae9e448a957723ff8adc2, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -15556,6 +15561,7 @@ MonoBehaviour:
   cam1: {fileID: 1014360103}
   cam2: {fileID: 1251340687}
   Keeper: {fileID: 826633495}
+  music: {fileID: 1744276942}
 --- !u!1001 &1772269696
 PrefabInstance:
   m_ObjectHideFlags: 0

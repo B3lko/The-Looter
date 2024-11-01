@@ -9,17 +9,20 @@ using UnityEngine.SceneManagement;
 public class MenuController : MonoBehaviour{
     public Image black;
     public GameObject btnPlay;
+    [SerializeField] AudioSource music;
 
 
     void Start(){
-        black.DOFade(0, 2);
+        music.DOFade(1, 3);
+        black.DOFade(0, 3);
     }
 
 
     void Update(){
         if(btnPlay.GetComponent<pressbtn>().press == true){
             btnPlay.GetComponent<pressbtn>().press = false;
-            black.DOFade(1, 2).OnComplete(() => {
+            music.DOFade(0, 3);
+            black.DOFade(1, 3).OnComplete(() => {
                 SceneManager.LoadScene("GameScene");
             });
         }

@@ -24,6 +24,12 @@ public class GameController : MonoBehaviour{
     public GameObject book;
     private int currentJewels = 0;
     private bool winner = false;
+    [SerializeField] AudioSource musicAmbience;
+
+
+    public void StopMusic(){
+        musicAmbience.Stop();
+    }
 
     public void AddJewel(){
         currentJewels += 1;
@@ -40,8 +46,11 @@ public class GameController : MonoBehaviour{
 
 
     void Start(){
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         player.transform.position = playerSpawn.transform.position;
-        black.DOFade(0, 2).OnComplete(() => {
+        musicAmbience.DOFade(1, 3);
+        black.DOFade(0, 3).OnComplete(() => {
             black.gameObject.SetActive(false);
             Color color;
             color = black.color;
@@ -100,7 +109,7 @@ public class GameController : MonoBehaviour{
 
 
     void Update(){
-        GameData.Instance.UpdatePlayTime(Time.deltaTime);
+        //GameData.Instance.UpdatePlayTime(Time.deltaTime);
         if(Input.GetKeyDown(KeyCode.C)){
             SceneManager.LoadScene("SummaryScene");
         }

@@ -6,6 +6,8 @@ using DG.Tweening;
 
 public class LockPuzzleController : MonoBehaviour{
     public Image Background;
+    public Image cross1;
+    public Image cross2;
     public GameObject Lock;
     public TextMeshPro positionAText;
     public TextMeshPro positionBText;
@@ -43,6 +45,8 @@ public class LockPuzzleController : MonoBehaviour{
     }
 
     public void ActivatePuzzleMode(){
+        cross1.gameObject.SetActive(false);
+        cross2.gameObject.SetActive(false);
         player.GetComponent<PlayerController>().offBookFlash();
         Background.gameObject.SetActive(true);
         Lock.SetActive(true);
@@ -52,6 +56,8 @@ public class LockPuzzleController : MonoBehaviour{
     }
 
     public void Leave(){
+        cross1.gameObject.SetActive(true);
+        cross2.gameObject.SetActive(true);
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         player.GetComponent<PlayerController>().SetMove(true);

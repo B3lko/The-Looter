@@ -65,6 +65,7 @@ public class KeeperController : MonoBehaviour{
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         if (stateInfo.IsName("Hook Punch") && stateInfo.normalizedTime >= 1.0f){
             gController.GetComponent<LoseController>().SetAFinish();
+            Destroy(gameObject);
         }
     }
 

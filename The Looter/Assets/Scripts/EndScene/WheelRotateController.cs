@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WheelRotateController : MonoBehaviour{
 
-    private float speed = 30f;
+    private float speed = 300f;
     void Update(){
         transform.Rotate(0, 0, -1 * Time.deltaTime * speed, Space.Self);
     }
