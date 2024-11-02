@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour{
     private bool isOutOfEnergy = false;
     private float rechargeTimer = 0f;
     public float rechargeDelay = 2f; // Tiempo de espera antes de comenzar a recargar
+    private bool isPause = false;
 
     void Awake() {
         _player = GetComponent<CharacterController>(); 
@@ -76,16 +77,29 @@ public class PlayerController : MonoBehaviour{
 
 
     void Update(){
-        if(Input.GetKeyDown(KeyCode.F) && hasALigthFlash && canMove){
-            isFlashOn = !isFlashOn; 
-            flashLigth.SetActive(isFlashOn);
-            if(isFlashOn){
-                flashLigthOn.Play();
-            }
-            else{
-                flashLigthOff.Play();
+        if(!isPause){
+            BookUpdate();
+            FlashLightUpdate();
+            if(canMove){
+                Movement();
             }
         }
+        if(Input.GetKeyDown(KeyCode.Escape)){
+            if(isPause){
+                isPause = false;
+            }
+            else{
+                isPause = true;
+            }
+        }
+        
+        
+
+        
+        
+    }
+
+    private void BookUpdate(){
         if(Input.GetKeyDown(KeyCode.B) && hasABook && canMove){
            isBookOn = !isBookOn; 
             book.SetActive(isBookOn);
@@ -96,11 +110,19 @@ public class PlayerController : MonoBehaviour{
                 flashLigthOff.Play();
             }
         }
+    }
 
-        if(canMove){
-            Movement();
+    private void FlashLightUpdate(){
+        if(Input.GetKeyDown(KeyCode.F) && hasALigthFlash && canMove){
+            isFlashOn = !isFlashOn; 
+            flashLigth.SetActive(isFlashOn);
+            if(isFlashOn){
+                flashLigthOn.Play();
+            }
+            else{
+                flashLigthOff.Play();
+            }
         }
-        
     }
 
     public void SetMove(bool can){

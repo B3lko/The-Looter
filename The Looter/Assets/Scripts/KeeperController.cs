@@ -18,6 +18,9 @@ public class KeeperController : MonoBehaviour{
     private int currentPointIndex = 0;
     private Animator animator;
     private bool isEnd = false;
+    private bool isPause = false;
+    private bool isDogBarking;
+
 
     void Start(){
         agent = GetComponent<NavMeshAgent>();
@@ -31,33 +34,68 @@ public class KeeperController : MonoBehaviour{
     }
 
     void Update(){
-        if(!isEnd){
-            float distanceToPlayer = Vector3.Distance(player.position, transform.position);
-            if (distanceToPlayer <= detectionRange){
-                agent.SetDestination(player.position);
+        if(!isPause){
+            if(!isEnd){
+                float distanceToPlayer = Vector3.Distance(player.position, transform.position);
 
-                if(distanceToPlayer > heart1Range){
-                    if(!Heart1.isPlaying && !Heart2.isPlaying){Heart1.Play();}
+                if(isDogBarking){
+                    agent.SetDestination(player.position);
+                    if (distanceToPlayer <= detectionRange){
+                        if(distanceToPlayer > heart1Range){
+                            if(!Heart1.isPlaying && !Heart2.isPlaying){Heart1.Play();}
+                        }
+
+                        else if(distanceToPlayer > heart2Range){
+                            if(!Heart2.isPlaying && !Heart1.isPlaying){Heart2.Play();}
+                        }
+
+                        if(distanceToPlayer <= loseRange){
+                            gController.GetComponent<LoseController>().StartFinishLoser();
+                        }
+                    }
+                }
+                else{
+                    if (distanceToPlayer <= detectionRange){
+                        agent.SetDestination(player.position);
+
+                        if(distanceToPlayer > heart1Range){
+                            if(!Heart1.isPlaying && !Heart2.isPlaying){Heart1.Play();}
+                        }
+
+                        else if(distanceToPlayer > heart2Range){
+                            if(!Heart2.isPlaying && !Heart1.isPlaying){Heart2.Play();}
+                        }
+
+                        if(distanceToPlayer <= loseRange){
+                            gController.GetComponent<LoseController>().StartFinishLoser();
+                        }
+                    }
+                    else{
+                        // Patrullar si el jugador está fuera del rango
+                        if (!agent.pathPending && agent.remainingDistance < 0.5f){
+                            MoveToNextPoint();
+                        }
+                    }
                 }
 
-                else if(distanceToPlayer > heart2Range){
-                    if(!Heart2.isPlaying && !Heart1.isPlaying){Heart2.Play();}
-                }
-
-                if(distanceToPlayer <= loseRange){
-                    gController.GetComponent<LoseController>().StartFinishLoser();
-                }
             }
             else{
-                // Patrullar si el jugador está fuera del rango
-                if (!agent.pathPending && agent.remainingDistance < 0.5f){
-                    MoveToNextPoint();
-                }
+                CheeckAnimation();
             }
         }
-        else{
-            CheeckAnimation();
+        if (Input.GetKeyDown(KeyCode.Escape)){
+            isPause = !isPause; // Alterna entre pausa y reanudación
+            animator.speed = isPause ? 0 : 1;
+            agent.isStopped = isPause; // Detener o reanudar el agente de navegación
         }
+    }
+
+    public void SetDogBarking(bool isbarking){
+        isDogBarking = isbarking;
+    }
+
+    public bool GetDogBarking(){
+        return isDogBarking;
     }
 
 

@@ -4,6 +4,7 @@ public class DoorFrontTrigger : MonoBehaviour{
     [SerializeField] GameObject Door1;
     [SerializeField] GameObject Door2;
     [SerializeField] GameObject Keeper;
+    [SerializeField] GameObject Dog;
     [SerializeField] GameObject posKeeper;
 
 
@@ -30,6 +31,12 @@ public class DoorFrontTrigger : MonoBehaviour{
             Transform randomChild = posKeeper.transform.GetChild(randomIndex);
             Keeper.transform.position = randomChild.position;
             Keeper.SetActive(true);
+
+            randomIndex = Random.Range(0, posKeeper.transform.childCount);
+            randomChild = posKeeper.transform.GetChild(randomIndex);
+            Dog.transform.position = randomChild.position;
+            Dog.SetActive(true);
+
 
             Destroy(gameObject);
         }

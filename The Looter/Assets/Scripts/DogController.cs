@@ -4,25 +4,30 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class DogController : MonoBehaviour{
-    [SerializeField] AudioSource Heart1;
-    [SerializeField] AudioSource Heart2;
+    [SerializeField] AudioSource bark;
+    //[SerializeField] AudioSource Heart2;
     //[SerializeField] GameObject gController;
     public Transform[] patrolPoints;
     public Transform player;
     public float detectionRange = 13f;
-    //public float heart1Range = 10f;
+    public float barkRange;
     //public float heart2Range = 5f;
     //public float loseRange = 1f;
+    public GameObject keeper;
 
     private NavMeshAgent agent;
     private int currentPointIndex = 0;
-    //private Animator animator;
+    private Animator animator;
     private bool isEnd = false;
+    private bool isBarking = false;
+    public float rotationSpeed = 5f;
+    private bool isPause = false;
+
 
     void Start(){
         agent = GetComponent<NavMeshAgent>();
         MoveToNextPoint();
-        //animator = transform.GetChild(0).gameObject.GetComponent<Animator>();
+        animator = GetComponent<Animator>();
     }
 
     /*public void SetAnimationFinish(){
@@ -31,42 +36,74 @@ public class DogController : MonoBehaviour{
     }*/
 
     void Update(){
-        if(!isEnd){
-            float distanceToPlayer = Vector3.Distance(player.position, transform.position);
-            if (distanceToPlayer <= detectionRange){
-                agent.SetDestination(player.position);
-                if(!Heart1.isPlaying && !Heart2.isPlaying){Heart1.Play();}
-                /*if(distanceToPlayer > heart1Range){
-                    if(!Heart1.isPlaying && !Heart2.isPlaying){Heart1.Play();}
-                }
+        if(!isPause){
 
-                else if(distanceToPlayer > heart2Range){
-                    if(!Heart2.isPlaying && !Heart1.isPlaying){Heart2.Play();}
-                }
+            if(!isEnd){
+                float distanceToPlayer = Vector3.Distance(player.position, transform.position);
+                if (distanceToPlayer <= detectionRange){
+                    agent.SetDestination(player.position);
+                    if(distanceToPlayer > barkRange){
+                        if(!agent.isStopped){
+                            agent.isStopped = true;
+                        }
+                        if(!isBarking){
+                            isBarking = !isBarking;
+                            animator.SetBool("isBarking", true);
+                        }
+                        if(!bark.isPlaying){
+                            bark.Play();
+                        }
+                        RotateTowardsPlayer();
+                        if(!keeper.GetComponent<KeeperController>().GetDogBarking()){
+                            keeper.GetComponent<KeeperController>().SetDogBarking(true);
+                        }
+                    }
 
-                if(distanceToPlayer <= loseRange){
-                    gController.GetComponent<LoseController>().StartFinishLoser();
-                }*/
+                /* else if(distanceToPlayer > heart2Range){
+                        if(!Heart2.isPlaying && !Heart1.isPlaying){Heart2.Play();}
+                    }
+
+                    if(distanceToPlayer <= loseRange){
+                        gController.GetComponent<LoseController>().StartFinishLoser();
+                    }*/
+                }
+                else{
+                    if(keeper.GetComponent<KeeperController>().GetDogBarking()){
+                        keeper.GetComponent<KeeperController>().SetDogBarking(false);
+                    }
+                    if(agent.isStopped){
+                        agent.isStopped = false;
+                    }
+                    if(isBarking){
+                        if(bark.isPlaying){
+                            bark.Stop();
+                        }
+                        isBarking = !isBarking;
+                        animator.SetBool("isBarking", false);
+                    }
+                    // Patrullar si el jugador está fuera del rango
+                    if (!agent.pathPending && agent.remainingDistance < 0.5f){
+                        MoveToNextPoint();
+                    }
+                }
             }
             else{
-                // Patrullar si el jugador está fuera del rango
-                if (!agent.pathPending && agent.remainingDistance < 0.5f){
-                    MoveToNextPoint();
-                }
+            // CheeckAnimation();
             }
         }
-        else{
-           // CheeckAnimation();
+        if (Input.GetKeyDown(KeyCode.Escape)){
+            isPause = !isPause; // Alterna entre pausa y reanudación
+            animator.speed = isPause ? 0 : 1;
+            agent.isStopped = isPause; // Detener o reanudar el agente de navegación
         }
     }
 
 
-    /*private void CheeckAnimation(){
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        if (stateInfo.IsName("Hook Punch") && stateInfo.normalizedTime >= 1.0f){
-            gController.GetComponent<LoseController>().SetAFinish();
-        }
-    }*/
+    void RotateTowardsPlayer(){
+        Vector3 direction = (player.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+    }
 
 
     void MoveToNextPoint(){
