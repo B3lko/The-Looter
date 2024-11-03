@@ -83,11 +83,12 @@ public class KeeperController : MonoBehaviour{
                 CheeckAnimation();
             }
         }
-        if (Input.GetKeyDown(KeyCode.Escape)){
-            isPause = !isPause; // Alterna entre pausa y reanudación
-            animator.speed = isPause ? 0 : 1;
-            agent.isStopped = isPause; // Detener o reanudar el agente de navegación
-        }
+    }
+
+    public void SetPause(){
+        isPause = !isPause; // Alterna entre pausa y reanudación
+        animator.speed = isPause ? 0 : 1;
+        agent.isStopped = isPause; // Detener o reanudar el agente de navegación
     }
 
     public void SetDogBarking(bool isbarking){

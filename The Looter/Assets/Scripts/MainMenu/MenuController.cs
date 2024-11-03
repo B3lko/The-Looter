@@ -9,10 +9,13 @@ using UnityEngine.SceneManagement;
 public class MenuController : MonoBehaviour{
     public Image black;
     public GameObject btnPlay;
+    public GameObject Gamedat;
     [SerializeField] AudioSource music;
 
 
     void Start(){
+        GameData.Instance.ResetData();
+        //Gamedat.GetComponent<GameData>().ResetData();
         music.DOFade(1, 3);
         black.DOFade(0, 3);
     }

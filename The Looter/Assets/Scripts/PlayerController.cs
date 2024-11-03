@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour{
     private CharacterController _player;
     [SerializeField] private float _gravity, _fallVelocity, _jumpForce;
     private Vector3 _axis, _movePlayer;
-    public float mouseSensitivity = 200f;
+    public float mouseSensitivity;// = 200f;
     public Transform playerBody;
     private float walkSpeed = 2.0f;
     private float runSpeed = 3.0f;
@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour{
         _player = GetComponent<CharacterController>(); 
     } 
     void Start(){
+        LoadSensitivity();
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -84,19 +85,10 @@ public class PlayerController : MonoBehaviour{
                 Movement();
             }
         }
-        if(Input.GetKeyDown(KeyCode.Escape)){
-            if(isPause){
-                isPause = false;
-            }
-            else{
-                isPause = true;
-            }
-        }
-        
-        
+    }
 
-        
-        
+    public void SetPause(){
+        isPause = !isPause;
     }
 
     private void BookUpdate(){
@@ -132,6 +124,11 @@ public class PlayerController : MonoBehaviour{
     private void Movement(){
         MouseMovement();
         KeyboardMovement();
+    }
+
+    private void LoadSensitivity(){
+        mouseSensitivity = PlayerPrefs.GetFloat("MouseSensitivity", 1.0f);
+        Debug.Log(mouseSensitivity);
     }
 
 

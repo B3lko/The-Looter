@@ -19,12 +19,19 @@ public class GameController : MonoBehaviour{
     [SerializeField] GameObject Door2;
     [SerializeField] GameObject player;
     [SerializeField] GameObject playerSpawn;
+    [SerializeField] GameObject dog;
+    [SerializeField] GameObject keeper;
+    [SerializeField] GameObject cam;
+    [SerializeField] Button btnMenu;
     [SerializeField] int cantJewels;
     [SerializeField] GameObject[] JewelPrefabs;
     public GameObject book;
     private int currentJewels = 0;
     private bool winner = false;
     [SerializeField] AudioSource musicAmbience;
+    [SerializeField] TextMeshProUGUI text;
+    private bool isPause = false;
+
 
 
     public void StopMusic(){
@@ -33,19 +40,30 @@ public class GameController : MonoBehaviour{
 
     public void AddJewel(){
         currentJewels += 1;
+        text.gameObject.SetActive(true);
+        text.text = "collected jewelry: " + currentJewels + " / 4";
         if(currentJewels == gameObject.GetComponent<NameLoader>().GetBooks()){
+            text.text = "collected jewelry: " + currentJewels + " / 4" + "\n" + "escape with the car!";
             winner = true;
             Door1.GetComponent<DoorController>().SetState(2);
             Door2.GetComponent<DoorController>().SetState(2);
         }
+        DOVirtual.DelayedCall(3, () => {
+            text.gameObject.SetActive(false);
+        });
     }
 
     public bool GetWinner(){
         return winner;
     }
 
+    public void GoMenu(){
+        SceneManager.LoadScene("MainMenu");
+    }
+
 
     void Start(){
+        Debug.Log("PlayTImeeee: " +  GameData.Instance.playTime);
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         player.transform.position = playerSpawn.transform.position;
@@ -109,13 +127,36 @@ public class GameController : MonoBehaviour{
 
 
     void Update(){
-        //GameData.Instance.UpdatePlayTime(Time.deltaTime);
+        if(!isPause){
+            GameData.Instance.UpdatePlayTime(Time.deltaTime);
+        }
         if(Input.GetKeyDown(KeyCode.C)){
             SceneManager.LoadScene("SummaryScene");
         }
+        if(Input.GetKeyDown(KeyCode.Escape)){
+            SetPause();
+        }
     }
 
-
+    public void SetPause(){
+        if(dog.activeSelf){
+            dog.GetComponent<DogController>().SetPause();
+        }
+        if(keeper.activeSelf){
+            keeper.GetComponent<KeeperController>().SetPause();
+        }
+        cam.GetComponent<CameraController>().SetPause();
+        player.GetComponent<PlayerController>().SetPause();
+        isPause = !isPause;
+        if(isPause){    
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else{
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+    }
 
      // Método para encontrar la tumba que tiene el mismo nombre
     private GameObject FindMatchingTomb(string nameToMatch)
@@ -137,12 +178,17 @@ public class GameController : MonoBehaviour{
     }
 
 
-    /*private void SpawnJewels(){
+    /*private void LoadSettings(){
+        // Cargar sensibilidad del mouse
+        float savedMouseSensitivity = PlayerPrefs.GetFloat(MouseSensitivityKey, 1.0f);
+        mouseSensitivitySlider.value = savedMouseSensitivity;
 
-        for(int i = 0; i < cantJewels; i++){
-            int jewelIndex = Random.Range(1, 5);
-            GameObject aux = Instantiate(JewelPrefabs[jewelIndex], transform.position, transform.rotation);
+        // Cargar volumen de efectos de sonido (SFX)
+        float savedSFXVolume = PlayerPrefs.GetFloat(SFXVolumeKey, 1.0f);
+        sfxVolumeSlider.value = savedSFXVolume;
 
-        }
+        // Cargar volumen de la música
+        float savedMusicVolume = PlayerPrefs.GetFloat(MusicVolumeKey, 1.0f);
+        musicVolumeSlider.value = savedMusicVolume;
     }*/
 }

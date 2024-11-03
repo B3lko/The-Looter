@@ -7,6 +7,7 @@ using DG.Tweening;
 public class LoseController : MonoBehaviour{
     [SerializeField] GameObject black;
     [SerializeField] GameObject keeper;
+    [SerializeField] GameObject dog;
     [SerializeField] GameObject player;
     [SerializeField] AudioSource punch;
     public AudioClip[] punchs;
@@ -32,6 +33,7 @@ public class LoseController : MonoBehaviour{
 
     public void SetAFinish(){
         gameObject.GetComponent<GameController>().StopMusic();
+        dog.GetComponent<DogController>().Bark0();
         punch.PlayOneShot(punchs[0]);
         black.SetActive(true);
         transform.DOScale(1, 2).OnComplete(() => {

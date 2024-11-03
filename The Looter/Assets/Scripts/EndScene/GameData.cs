@@ -9,7 +9,7 @@ public class GameData : MonoBehaviour{
     // Variables para almacenar datos de la partida
     public float playTime;
     public string ending;
-    public int collectedItems;
+    //public int collectedItems;
     public int collectedKeys;
     public int collectedJewels;
     public bool collectedGreat = false;
@@ -28,8 +28,14 @@ public class GameData : MonoBehaviour{
 
     // Método para resetear los datos al inicio de una partida nueva
     public void ResetData(){
+       // collectedItems = 0;
+        collectedKeys = 0;
+        collectedJewels = 0;
         playTime = 0f;
-        collectedItems = 0;
+        ending = "";
+        collectedGreat = false;
+        Debug.Log("PlayTIme: " + playTime);
+        //collectedItems = 0;
     }
 
     // Método para actualizar el tiempo de juego
@@ -38,9 +44,9 @@ public class GameData : MonoBehaviour{
     }
 
     // Método para recolectar un objeto
-    public void CollectItem(){
+    /*public void CollectItem(){
         collectedItems++;
-    }
+    }*/
     public void CollectKey(){
         collectedKeys++;
     }

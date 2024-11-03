@@ -30,6 +30,11 @@ public class DogController : MonoBehaviour{
         animator = GetComponent<Animator>();
     }
 
+
+    public void Bark0(){
+        bark.volume = 0f;
+    }
+
     /*public void SetAnimationFinish(){
         animator.SetBool("canPunch", true);
         isEnd = true;
@@ -54,8 +59,10 @@ public class DogController : MonoBehaviour{
                             bark.Play();
                         }
                         RotateTowardsPlayer();
-                        if(!keeper.GetComponent<KeeperController>().GetDogBarking()){
-                            keeper.GetComponent<KeeperController>().SetDogBarking(true);
+                        if(keeper){
+                            if(!keeper.GetComponent<KeeperController>().GetDogBarking()){
+                                keeper.GetComponent<KeeperController>().SetDogBarking(true);
+                            }
                         }
                     }
 
@@ -68,8 +75,10 @@ public class DogController : MonoBehaviour{
                     }*/
                 }
                 else{
-                    if(keeper.GetComponent<KeeperController>().GetDogBarking()){
-                        keeper.GetComponent<KeeperController>().SetDogBarking(false);
+                    if(keeper){
+                        if(keeper.GetComponent<KeeperController>().GetDogBarking()){
+                            keeper.GetComponent<KeeperController>().SetDogBarking(false);
+                        }
                     }
                     if(agent.isStopped){
                         agent.isStopped = false;
@@ -87,14 +96,18 @@ public class DogController : MonoBehaviour{
                     }
                 }
             }
-            else{
-            // CheeckAnimation();
-            }
         }
-        if (Input.GetKeyDown(KeyCode.Escape)){
-            isPause = !isPause; // Alterna entre pausa y reanudación
-            animator.speed = isPause ? 0 : 1;
-            agent.isStopped = isPause; // Detener o reanudar el agente de navegación
+    }
+
+    public void SetPause(){
+        isPause = !isPause; // Alterna entre pausa y reanudación
+        animator.speed = isPause ? 0 : 1;
+        agent.isStopped = isPause; // Detener o reanudar el agente de navegación
+        if(bark.isPlaying && isPause){
+            bark.Stop();
+        }
+        if(isBarking && !isPause){
+            bark.Play();
         }
     }
 
