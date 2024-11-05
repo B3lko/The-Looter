@@ -6191,7 +6191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -6788,10 +6788,10 @@ RectTransform:
   - {fileID: 1954780400}
   m_Father: {fileID: 626373473}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1920, y: 1080}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &666718233
 Animator:
@@ -14485,8 +14485,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -687.03345}
-  m_SizeDelta: {x: 0, y: 1374.0669}
+  m_AnchoredPosition: {x: 0, y: -336}
+  m_SizeDelta: {x: 0, y: -229}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1617269715
 MonoBehaviour:
@@ -14513,8 +14513,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: afe5ef24e07d9464d9dbdad1990d6b3d, type: 2}
+  m_sharedMaterial: {fileID: 7491694751206259790, guid: afe5ef24e07d9464d9dbdad1990d6b3d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -14538,8 +14538,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -16432,8 +16432,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -1494.2065}
-  m_SizeDelta: {x: 0, y: 2988.413}
+  m_AnchoredPosition: {x: 0, y: -2109}
+  m_SizeDelta: {x: -200, y: -2957.9998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1954780401
 MonoBehaviour:
@@ -16455,28 +16455,44 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '
-
-
-    Game Design: Federico Eigler
-
-    Programming: Federico Eigler
-
-
-    Musics
-    and SFXs
-
-    asd
-
-    asd
-
-    asd
-
-
-    Models'
+  m_text: "Subject: Final Project\r\nCareer: Technician in Video Game Design and
+    Programming\r\nYear: 2024\n\n\nGame Design, Programming and Content Integration:
+    Federico Eigler\r\n\r\nNote: All visual, sound and animation assets were created
+    by their respective authors and adapted to the game by Federico Eigler.\n\n1.
+    Graphics\n\n\"Lowpoly BountyHunter RIO 2\" by VertexModeler from Unity Asset
+    Store, Unity Asset Store License, Free.\n\n\"Cathedral and Cemetery Kit\" by
+    Aquarius Max from Unity Asset Store, Unity Asset Store License, Free.\n\n\"Graveyard
+    Halloween - Unity URP Package\" by batthecatgames from itch.io, CC BY 4.0.\n\n\"Retro
+    Car With Interior - PSX asset (Free)\" by Bricchi Games from itch.io, CC 4.0.\n\n\"PSX
+    style modular hedges\" by valsekamerplant from itch.io, CC0 1.0 Universal.\n\n\"Exploration
+    objects\" by elbolilloduro from itch.io, CC0.\n\n\"Low Poly Tools\" by gorlaks
+    from itch.io, CC BY.\n\n\"PS1-Style Leather Cased Notebook\" by PepperoniJabroni
+    from itch.io, Free, Unknown License.\n\n\"Low Poly Treasure\" by elegant crow
+    from itch.io, Free, Unknown License.\n\n\"Dog\" by madtrollstudio from Poly Pizza,
+    CC BY.\n\n\"Key\" by Poly by Google from Poly Pizza, CC BY.\n\n\"PSX Style Modular
+    Low Poly Graveyard\" by blender voyage from itch.io, CC BY 4.0.\n\n\"Lowpoly
+    Medieval Skeleton - Free - MEDIEVAL FANTASY SERIES\" by Polytope Studio  from
+    Unity Asset Store, Unity Asset Store License, Free.\n\n\n\n2. Animations\n\n\"Hook
+    Punch\", \"Walking\", \"Skeleton_Idle\" from Mixamo, Mixamo License, Commercial
+    Use Permitted.\n\n\"Take 001 0\", \"Take 001\" by Emilio Eigler\n\n\n\n3. Music
+    and SFX\n\nAmbient Music: \"Forest Night\" by TomMusic from itch.io, Royalty-Free,
+    Optional Attribution\n\nMenu Music: \"Sketchbook 2024-07-19_L04\" by Benjamin
+    from itch.io, CC-0.\n\nSFXs: \"Stone Run 1\", \"Stone Run 2\", \n\"Stone Run
+    3\", \"Stone Run 4\", \"Stone Run 5\",\r \n\"Stone Walk 1\", \"Stone Walk 2\",
+    \"Stone Walk 3\", \"Stone Walk 4\",  \"Stone Walk 5\",\r \n\"Dirt Walk 1\", \"Dirt
+    Walk 2\", \"Dirt Walk 3\", \"Dirt Walk 4\", \"Dirt Walk 5\", \"Spell Impact 1\",
+    \"Spell Impact 2\", \"Spell Impact 3\" by TomMusic from itch.io, Royalty-Free,
+    Optional Attribution.\n\nSFXs: \"Flashlight off\", \"Flashlight on\", \"Car_door_shutting\",
+    \"Car_door_opening\", \"Breathing_fast\" by ObsydianX from itch.io, CC 4.0.\n\nSFXs:
+    \"shdemo-sfx-166\", \"shdemo-sfx-833\", \"shdemo-sfx-835\", \"shdemo-sfx-757\",
+    \"shdemo-sfx-758\", \"shdemo-sfx-759\" by raudokyubu from itch.io, CC BY.\n\nSFX:
+    \"Perro ladrando   ladrido   efecto de sonido sin copyright - Efectos de sonido
+    y m\xFAsica sin copyright (youtube)\" by Efectos de sonido y m\xFAsica sin copyright
+    from youtube.\n\n\n\n4. Fonts\n\nTitles and Buttons: \"Shlop\" by Typodermic
+    Fonts from Dafont, 100% Free.\n\nTexts: \"BELLGOTHICSTD-BLACK SDF\" by ???"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5a4f61c239adb524a81512412106d65e, type: 2}
+  m_sharedMaterial: {fileID: 5841820636681464030, guid: 5a4f61c239adb524a81512412106d65e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -16500,8 +16516,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -16512,7 +16528,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 3
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0

@@ -63,7 +63,7 @@ public class GameController : MonoBehaviour{
 
 
     void Start(){
-        Debug.Log("PlayTImeeee: " +  GameData.Instance.playTime);
+        //Debug.Log("PlayTImeeee: " +  GameData.Instance.playTime);
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         player.transform.position = playerSpawn.transform.position;
@@ -128,7 +128,7 @@ public class GameController : MonoBehaviour{
 
     void Update(){
         if(!isPause){
-            GameData.Instance.UpdatePlayTime(Time.deltaTime);
+            //GameData.Instance.UpdatePlayTime(Time.deltaTime);
         }
         if(Input.GetKeyDown(KeyCode.C)){
             SceneManager.LoadScene("SummaryScene");
