@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class GameController : MonoBehaviour{
 
@@ -31,6 +32,7 @@ public class GameController : MonoBehaviour{
     [SerializeField] AudioSource musicAmbience;
     [SerializeField] TextMeshProUGUI text;
     private bool isPause = false;
+    public AudioMixer audioMixer;
 
 
 
@@ -60,6 +62,8 @@ public class GameController : MonoBehaviour{
     public void GoMenu(){
         SceneManager.LoadScene("MainMenu");
     }
+
+
 
 
     void Start(){
@@ -133,7 +137,7 @@ public class GameController : MonoBehaviour{
         if(Input.GetKeyDown(KeyCode.C)){
             SceneManager.LoadScene("SummaryScene");
         }
-        if(Input.GetKeyDown(KeyCode.Escape)){
+        if(Input.GetKeyDown(KeyCode.P)){
             SetPause();
         }
     }
