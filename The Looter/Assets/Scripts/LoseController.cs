@@ -21,6 +21,7 @@ public class LoseController : MonoBehaviour{
     }
     public void StartFinishLoser(){
         //black.
+        GetComponent<GameController>().SetCinematic();
         
         player.GetComponent<PlayerController>().SetMove(false);
         player.transform.GetChild(0).transform.localRotation = Quaternion.Euler(10, transform.localRotation.y, transform.localRotation.z);

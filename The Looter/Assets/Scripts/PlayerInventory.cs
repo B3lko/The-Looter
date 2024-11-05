@@ -34,7 +34,7 @@ public class PlayerInventory : MonoBehaviour{
         }
         stringList.Add(newString);
         Debug.Log("Agregado: " + newString);
-        if(stringList.Count == 3){
+        if(stringList.Count == 2){
             Door1.GetComponent<DoorController>().SetState(2);
             Door2.GetComponent<DoorController>().SetState(2);
         }
@@ -48,14 +48,14 @@ public class PlayerInventory : MonoBehaviour{
 
         }
 
-        if(newString == "NoteBook"){
+        /*if(newString == "NoteBook"){
             gameObject.GetComponent<PlayerController>().SetHasBook(true);
             text.text = "Press 'B' to read the book";
             text.gameObject.SetActive(true);
             DOVirtual.DelayedCall(3, () => {
                 text.gameObject.SetActive(false);
             });
-        }
+        }*/
 
         if(newString == "Jewel"){
             

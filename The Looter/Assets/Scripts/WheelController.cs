@@ -6,7 +6,9 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class WheelController : MonoBehaviour{
+    [SerializeField] GameObject gController;
     [SerializeField] GameObject keeper;
+    [SerializeField] GameObject dog;
     [SerializeField] GameObject lightCar1;
     [SerializeField] GameObject lightCar2;
     [SerializeField] GameObject player;
@@ -14,6 +16,9 @@ public class WheelController : MonoBehaviour{
     public Image black;
     public Image cross1;
     public Image cross2;
+    public Image stamina;
+    public Image page1;
+    public Image page2;
     Color color;
     private bool isRotting = false;
     private bool isBack = false;
@@ -55,11 +60,16 @@ public class WheelController : MonoBehaviour{
         black.color = color;
         black.gameObject.SetActive(true);
 
+        gController.GetComponent<GameController>().SetCinematic();
+
         player.GetComponent<PlayerController>().SetMove(false);
         keeper.SetActive(false);
+        dog.SetActive(false);
 
         black.DOFade(1, 2).OnComplete(() => {
-
+            page1.gameObject.SetActive(false);
+            page2.gameObject.SetActive(false);
+            stamina.gameObject.SetActive(false);
             cross1.gameObject.SetActive(false);
             cross2.gameObject.SetActive(false);
             car.transform.GetChild(4).transform.localRotation = Quaternion.Euler(-90, 0, 0);

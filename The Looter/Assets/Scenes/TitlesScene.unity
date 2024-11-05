@@ -16432,7 +16432,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -2109}
+  m_AnchoredPosition: {x: 0, y: -2345}
   m_SizeDelta: {x: -200, y: -2957.9998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1954780401
@@ -16489,7 +16489,11 @@ MonoBehaviour:
     \"Perro ladrando   ladrido   efecto de sonido sin copyright - Efectos de sonido
     y m\xFAsica sin copyright (youtube)\" by Efectos de sonido y m\xFAsica sin copyright
     from youtube.\n\n\n\n4. Fonts\n\nTitles and Buttons: \"Shlop\" by Typodermic
-    Fonts from Dafont, 100% Free.\n\nTexts: \"BELLGOTHICSTD-BLACK SDF\" by ???"
+    Fonts from Dafont, 100% Free.\n\nTexts: \"BELLGOTHICSTD-BLACK SDF\" by Unkonw,
+    Unknown license.\n\n\n\nAcknowledgments:\r\n\nTo my family for supporting me
+    throughout this career.\r\n\nTo my colleagues in the industry for sharing this
+    passion for video games.\r\n\nTo all the teachers of this course for sharing
+    their knowledge about making video games!\r\n\r\nThank you very much <3"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5a4f61c239adb524a81512412106d65e, type: 2}
   m_sharedMaterial: {fileID: 5841820636681464030, guid: 5a4f61c239adb524a81512412106d65e, type: 2}

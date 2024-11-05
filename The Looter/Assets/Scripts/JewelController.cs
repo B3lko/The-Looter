@@ -18,13 +18,13 @@ public class JewelController : MonoBehaviour{
 
 
     void Awake(){
-        bk = GameObject.FindWithTag("Book");
+        //bk = GameObject.FindWithTag("Book");
         GameCont = GameObject.FindWithTag("GameController");
     }
 
 
     void Start(){
-        bk.SetActive(false);
+        //bk.SetActive(false);
     }
 
 

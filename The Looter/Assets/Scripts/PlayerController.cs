@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour{
     [SerializeField] GameObject flashLigth;
     [SerializeField] GameObject book;
+    [SerializeField] GameObject next;
+    [SerializeField] GameObject previous;
     [SerializeField] bool hasALigthFlash = false;
     [SerializeField] bool hasABook = false;
     [SerializeField] AudioSource flashLigthOn;
@@ -14,7 +17,7 @@ public class PlayerController : MonoBehaviour{
     public AudioClip[] stoneRunSounds;  // Array para sonidos de piedra correr
     public AudioSource audioSource;   // Componente AudioSource
     private bool isFlashOn = false; 
-    private bool isBookOn = false; 
+    private bool isBookOn = true; 
     private CharacterController _player;
     [SerializeField] private float _gravity, _fallVelocity, _jumpForce;
     private Vector3 _axis, _movePlayer;
@@ -25,7 +28,7 @@ public class PlayerController : MonoBehaviour{
     private float _moveSpeed = 0;
     private float verticalRotation = 0;
     Vector3 moveDirection;
-    private bool canMove = true;
+    private bool canMove = false;
     ///
     public float energy = 100f; // Energía inicial
     public float depletionRate = 20f; // Velocidad a la que disminuye la energía mientras corre
@@ -37,6 +40,8 @@ public class PlayerController : MonoBehaviour{
     private float rechargeTimer = 0f;
     public float rechargeDelay = 2f; // Tiempo de espera antes de comenzar a recargar
     private bool isPause = false;
+    public Image stamina;
+    public Image staminaBG;
 
     void Awake() {
         _player = GetComponent<CharacterController>(); 
@@ -78,6 +83,11 @@ public class PlayerController : MonoBehaviour{
 
 
     void Update(){
+        if(isBookOn){
+            Debug.Log("ASD0000000000000000000000000");
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
         if(!isPause){
             BookUpdate();
             FlashLightUpdate();
@@ -92,14 +102,19 @@ public class PlayerController : MonoBehaviour{
     }
 
     private void BookUpdate(){
-        if(Input.GetKeyDown(KeyCode.B) && hasABook && canMove){
+        if(Input.GetKeyDown(KeyCode.B)){
            isBookOn = !isBookOn; 
+            canMove = !isBookOn;
             book.SetActive(isBookOn);
+            next.SetActive(isBookOn);
+            previous.SetActive(isBookOn);
             if(isBookOn){
                 flashLigthOn.Play();
             }
             else{
                 flashLigthOff.Play();
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
             }
         }
     }
@@ -174,11 +189,10 @@ public class PlayerController : MonoBehaviour{
         _player.Move(moveDirection * _moveSpeed * Time.deltaTime);
 
 
-        if (isRunning && !isOutOfEnergy)
-        {
+        if (isRunning && !isOutOfEnergy){
+            staminaBG.gameObject.SetActive(true);
             energy -= depletionRate * Time.deltaTime;
-            if (energy <= 0)
-            {   
+            if (energy <= 0){   
                 canMove2 = false;
                 energy = 0;
                 isRunning = false;
@@ -203,11 +217,12 @@ public class PlayerController : MonoBehaviour{
         {
             // Recuperación de energía
             energy += recoveryRate * Time.deltaTime;
-            if (energy > 100f)
-            {
+            if (energy > 100f){
+                staminaBG.gameObject.SetActive(false);
                 energy = 100f;
             }
         }
+        stamina.fillAmount = energy / 100;
     
     }
 

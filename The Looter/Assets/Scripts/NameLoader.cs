@@ -5,7 +5,7 @@ using TMPro;
 public class NameLoader : MonoBehaviour{
     private PeopleList peopleData;
     private List<string> selectedNames = new List<string>();
-    public TextMeshPro[] bookTexts;
+    public TextMeshProUGUI[] bookTexts;
 
     void Awake() {
         LoadNamesFromJson();

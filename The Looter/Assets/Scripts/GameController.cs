@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour{
     public Image black;
 
     //
+    [SerializeField] GameObject canvas1;
     [SerializeField] GameObject Door1;
     [SerializeField] GameObject Door2;
     [SerializeField] GameObject player;
@@ -33,11 +34,16 @@ public class GameController : MonoBehaviour{
     [SerializeField] TextMeshProUGUI text;
     private bool isPause = false;
     public AudioMixer audioMixer;
+    private bool inCinematic = false;
 
 
 
     public void StopMusic(){
         musicAmbience.Stop();
+    }
+
+    public void SetCinematic(){
+        inCinematic = true;
     }
 
     public void AddJewel(){
@@ -68,8 +74,10 @@ public class GameController : MonoBehaviour{
 
     void Start(){
         //Debug.Log("PlayTImeeee: " +  GameData.Instance.playTime);
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        //Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
         player.transform.position = playerSpawn.transform.position;
         musicAmbience.DOFade(1, 3);
         black.DOFade(0, 3).OnComplete(() => {
@@ -80,9 +88,9 @@ public class GameController : MonoBehaviour{
             black.color = color;
         });
                 // Obtener los componentes TextMeshPro en el objeto "book"
-        TextMeshPro[] bookTexts = book.GetComponentsInChildren<TextMeshPro>();
+        TextMeshProUGUI[] bookTexts = book.GetComponentsInChildren<TextMeshProUGUI>();
         // Iterar sobre cada texto en el libro
-        foreach (TextMeshPro bookText in bookTexts){
+        foreach (TextMeshProUGUI bookText in bookTexts){
             //Debug.Log(bookText.text);
             string nameToMatch = bookText.text; // Obtener el nombre del texto
             // Buscar la tumba que tiene el mismo nombre
@@ -131,13 +139,14 @@ public class GameController : MonoBehaviour{
 
 
     void Update(){
+        
         if(!isPause){
             //GameData.Instance.UpdatePlayTime(Time.deltaTime);
         }
         if(Input.GetKeyDown(KeyCode.C)){
             SceneManager.LoadScene("SummaryScene");
         }
-        if(Input.GetKeyDown(KeyCode.P)){
+        if(Input.GetKeyDown(KeyCode.P) && !inCinematic){
             SetPause();
         }
     }
@@ -152,11 +161,15 @@ public class GameController : MonoBehaviour{
         cam.GetComponent<CameraController>().SetPause();
         player.GetComponent<PlayerController>().SetPause();
         isPause = !isPause;
-        if(isPause){    
+        if(isPause){
+            canvas1.SetActive(false);
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
         }
         else{
+            transform.DOScaleX(1, 0.5f).OnComplete(() => {
+                canvas1.SetActive(true);
+            });
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
         }
