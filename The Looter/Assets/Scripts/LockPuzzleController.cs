@@ -9,9 +9,9 @@ public class LockPuzzleController : MonoBehaviour{
     public Image cross1;
     public Image cross2;
     public GameObject Lock;
-    public TextMeshPro positionAText;
-    public TextMeshPro positionBText;
-    public TextMeshPro positionCText;
+    public TextMeshProUGUI positionAText;
+    public TextMeshProUGUI positionBText;
+    public TextMeshProUGUI positionCText;
     public TextMeshProUGUI WrongText;
     public GameObject player;
     private int positionA = 0;
@@ -25,6 +25,7 @@ public class LockPuzzleController : MonoBehaviour{
 
     public Transform parentObject; // Objeto padre que contiene los hijos con textos 3D
     private List<Transform> childTexts = new List<Transform>();
+    [SerializeField] AudioSource open;
 
     private void Start(){
         correctA = Random.Range(0, 10);
@@ -49,7 +50,7 @@ public class LockPuzzleController : MonoBehaviour{
         isActive = true;
         cross1.gameObject.SetActive(false);
         cross2.gameObject.SetActive(false);
-        player.GetComponent<PlayerController>().offBookFlash();
+        //player.GetComponent<PlayerController>().offBookFlash();
         Background.gameObject.SetActive(true);
         Lock.SetActive(true);
         Cursor.visible = true;
@@ -108,6 +109,7 @@ public class LockPuzzleController : MonoBehaviour{
     public void CheckCode(){
         if (positionA == correctA && positionB == correctB && positionC == correctC){
             Leave();
+            open.Play();
             transform.parent.transform.DOLocalRotateQuaternion(Quaternion.Euler(90, 0, 0), 2f).OnComplete(() => {});
             transform.parent.transform.DOScaleZ(0.1f, 2);
             transform.parent.transform.DOLocalMoveY(-1.046f,2);

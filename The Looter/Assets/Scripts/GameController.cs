@@ -35,6 +35,7 @@ public class GameController : MonoBehaviour{
     private bool isPause = false;
     public AudioMixer audioMixer;
     private bool inCinematic = false;
+    private string tagToCheck = "Book";
 
 
 
@@ -73,6 +74,7 @@ public class GameController : MonoBehaviour{
 
 
     void Start(){
+        checktag();
         //Debug.Log("PlayTImeeee: " +  GameData.Instance.playTime);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -104,7 +106,8 @@ public class GameController : MonoBehaviour{
                 int jewelIndex = Random.Range(0, 4);
                 GameObject newJewel = Instantiate(JewelPrefabs[jewelIndex], matchingTomb.transform.parent.GetChild(0).position, Quaternion.identity, matchingTomb.transform.parent);
                 if(!matchingTomb.GetComponent<TombController>().isWall){
-                    newJewel.transform.SetSiblingIndex(7);
+                    newJewel.GetComponent<JewelController>().isWall = false;
+                    newJewel.transform.SetSiblingIndex(9);
                     if(jewelIndex == 0){
                         newJewel.transform.localPosition = new Vector3(-0.761f, 1.35f, 0);
                         newJewel.transform.localRotation = Quaternion.Euler(0, -90, 0);
@@ -119,6 +122,7 @@ public class GameController : MonoBehaviour{
                     }
                 }
                 else{
+                    newJewel.GetComponent<JewelController>().isWall = true;
                     newJewel.transform.parent = newJewel.transform.parent.transform.GetChild(0);
                     if(jewelIndex == 0){
                         newJewel.transform.localPosition = new Vector3(0, 0.04f, -0.785f);
@@ -134,6 +138,28 @@ public class GameController : MonoBehaviour{
                     }
                 }
             }
+        }
+    }
+
+    private void checktag(){
+        GameObject[] objectsWithTag = GameObject.FindGameObjectsWithTag(tagToCheck);
+
+        // Verifica si hay más de un objeto con ese tag
+        if (objectsWithTag.Length > 1)
+        {
+            Debug.Log($"Hay {objectsWithTag.Length} objetos con el tag '{tagToCheck}':");
+            foreach (GameObject obj in objectsWithTag)
+            {
+                Debug.Log($"- {obj.name}");
+            }
+        }
+        else if (objectsWithTag.Length == 1)
+        {
+            Debug.Log($"Solo hay un objeto con el tag '{tagToCheck}': {objectsWithTag[0].name}");
+        }
+        else
+        {
+            Debug.Log($"No se encontraron objetos con el tag '{tagToCheck}' en la escena.");
         }
     }
 

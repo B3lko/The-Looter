@@ -26,9 +26,11 @@ public class GraveController : MonoBehaviour{
                 });*/
 
                 if(transform.localScale.y == 0.5f){
-                    transform.DOMoveY(transform.position.y - 0.25f, time).OnComplete(() => {
+                    transform.DOMoveY(transform.position.y - 0.15f, time).OnComplete(() => {
                         gameObject.tag = "Untagged";
                         transform.parent.GetChild(0).GetChild(0).GetComponent<CoffinController>().SetReady();
+                        transform.parent.GetChild(8).gameObject.SetActive(false);
+                        Debug.Log("YEah0011");
                         if(transform.parent.GetChild(7) != null){
                             transform.parent.GetChild(7).GetComponent<JewelController>().SetReady();
                         }
@@ -45,30 +47,4 @@ public class GraveController : MonoBehaviour{
         }
     }
 
-    public void StartPalada(){
-        pala.transform.position = new Vector3(transform.position.x + 1, transform.position.y + 1, transform.position.z);
-        pala.transform.rotation = Quaternion.Euler(90,0,0);
-        pala.SetActive(true);
-        pala.transform.DORotate(new Vector3(45, 0, 0), 1f);
-        pala.transform.DOMove(new Vector3(transform.position.x + 1,transform.position.y - 0.3f, transform.position.z),1.0f).OnComplete(() => {
-            paladaSFX.Play();
-            pala.transform.DOMove(new Vector3(transform.position.x - 1,transform.position.y + 0.3f, transform.position.z),0.5f);
-            transform.DOScaleY(1.5f,0.5f).OnComplete(() => {
-                pala.transform.DOMove(new Vector3(transform.position.x + 1,transform.position.y - 0.3f, transform.position.z),1.0f).OnComplete(() => {
-                    paladaSFX.Play();
-                    transform.DOScaleY(1f,0.5f).OnComplete(() => {
-                        paladaSFX.Play();
-                        pala.transform.DOMove(new Vector3(transform.position.x - 1,transform.position.y + 0.3f, transform.position.z),0.5f);
-                        transform.DOScaleY(0.5f,0.5f).OnComplete(() => {
-                            paladaSFX.Play();
-                            pala.transform.DOMove(new Vector3(transform.position.x - 1,transform.position.y + 0.3f, transform.position.z),0.5f);
-                            transform.DOScaleY(0f,0.5f);
-                        });
-                    });
-                });
-            });
-            paladaSFX.Play();
-        });
-        //pala
-    }
 }

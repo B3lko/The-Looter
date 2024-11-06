@@ -59,7 +59,7 @@ public class Raycast : MonoBehaviour{
                 text.text = textsString["Dig"];
                 text.gameObject.SetActive(true);
                 if(Input.GetKeyDown(KeyCode.E)){
-                    hit.transform.gameObject.GetComponent<GraveController>().DoPalada();
+                    hit.transform.parent.transform.GetChild(2).gameObject.GetComponent<GraveController>().DoPalada();
                 }
             }
             else if(hit.transform.gameObject.tag == "Coffin"){
@@ -76,7 +76,7 @@ public class Raycast : MonoBehaviour{
                 text.gameObject.SetActive(true);
             }
             else if(hit.transform.gameObject.tag == "Tomb"){
-                text.text = textsString["Tomb"];
+                /*text.text = textsString["Tomb"];
                 text.gameObject.SetActive(true);
                 if(Input.GetKeyDown(KeyCode.E)){
                     textDown.text = hit.transform.gameObject.GetComponent<TombController>().GetName();
@@ -84,7 +84,17 @@ public class Raycast : MonoBehaviour{
                     DOVirtual.DelayedCall(3, () => {
                         textDown.gameObject.SetActive(false);
                     });
-                }
+                }*/
+                text.text = hit.transform.gameObject.GetComponent<TombController>().GetName();
+                text.gameObject.SetActive(true);
+                //if(Input.GetKeyDown(KeyCode.E)){
+                    //textDown.text = hit.transform.gameObject.GetComponent<TombController>().GetName();
+                    //textDown.gameObject.SetActive(true);
+                    //DOVirtual.DelayedCall(3, () => {
+                      //  textDown.gameObject.SetActive(false);
+                    //});
+                //}
+                
             }
             else if(hit.transform.gameObject.tag == "Jewel"){
                 text.text = textsString["Jewel"];

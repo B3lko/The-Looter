@@ -2,20 +2,20 @@ using UnityEngine;
 using TMPro;
 
 public class BookController : MonoBehaviour{
-    private TextMeshPro[] textMeshPro;
+    private TextMeshProUGUI[] textMeshPro;
 
     // Start is called before the first frame update
     void Start(){
-        textMeshPro = GetComponentsInChildren<TextMeshPro>();
+        textMeshPro = GetComponentsInChildren<TextMeshProUGUI>();
         // Imprimir los nombres de los componentes encontrados
-        foreach (TextMeshPro text in textMeshPro){
+        foreach (TextMeshProUGUI text in textMeshPro){
             Debug.Log("Texto encontrado: " + text.text);
         }
     }
 
 
     public void fede(string name){
-        foreach (TextMeshPro text in textMeshPro){
+        foreach (TextMeshProUGUI text in textMeshPro){
             if (text.text == name){
                 string content = text.text;
                 text.text = $"<s>{content}</s>";

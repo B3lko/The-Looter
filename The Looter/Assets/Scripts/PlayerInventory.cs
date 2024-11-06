@@ -28,6 +28,11 @@ public class PlayerInventory : MonoBehaviour{
             GameData.Instance.CollectKey();
             newString += keyIndex;
             keyIndex += 1;
+            text.text = "collected keys: " + GameData.Instance.collectedKeys + " / 4";
+            text.gameObject.SetActive(true);
+            DOVirtual.DelayedCall(3, () => {
+                text.gameObject.SetActive(false);
+            });
         }
         if(newString == "Great"){
             GameData.Instance.CollectGreat();
