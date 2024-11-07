@@ -18,6 +18,8 @@ TagManager:
   - Coffin2
   - PuzzleDoor
   - Ground
+  - PopeTomb
+  - Coffin3
   layers:
   - Default
   - TransparentFX

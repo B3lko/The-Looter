@@ -19,7 +19,8 @@ public class SummaryScreen : MonoBehaviour{
         });
         PlayTime();
         collectedKeysText.text = GameData.Instance.collectedKeys + " / 4";
-        lootedTombsText.text = GameData.Instance.collectedJewels + " / 8";
+        
+        lootedTombsText.text = GameData.Instance.collectedJewels + " / 5";
         if(GameData.Instance.collectedGreat){
             GreatText.text = "yes";
         }
@@ -27,7 +28,9 @@ public class SummaryScreen : MonoBehaviour{
             GreatText.text = "no";
         }
         endingText.text = GameData.Instance.ending;
-
+        if(endingText.text == "Money"){
+            lootedTombsText.text = (GameData.Instance.collectedJewels + 1) + " / 5";
+        }
        // collectedItemsText.text = "Objetos recolectados: " + GameData.Instance.collectedItems;
     }
 

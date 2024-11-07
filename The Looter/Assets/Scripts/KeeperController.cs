@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class KeeperController : MonoBehaviour{
     [SerializeField] AudioSource Heart1;
     [SerializeField] AudioSource Heart2;
+    [SerializeField] AudioSource Scream;
     [SerializeField] GameObject gController;
      public Transform[] patrolPoints;
     public Transform player;
@@ -50,6 +51,7 @@ public class KeeperController : MonoBehaviour{
                         }
 
                         if(distanceToPlayer <= loseRange){
+                            Scream.Play();
                             gController.GetComponent<LoseController>().StartFinishLoser();
                         }
                     }
@@ -67,6 +69,7 @@ public class KeeperController : MonoBehaviour{
                         }
 
                         if(distanceToPlayer <= loseRange){
+                            Scream.Play();
                             gController.GetComponent<LoseController>().StartFinishLoser();
                         }
                     }

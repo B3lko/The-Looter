@@ -35,6 +35,7 @@ public class PlayerInventory : MonoBehaviour{
             });
         }
         if(newString == "Great"){
+            Debug.Log("YEAH9999999999999");
             GameData.Instance.CollectGreat();
         }
         stringList.Add(newString);

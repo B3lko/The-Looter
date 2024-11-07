@@ -14,11 +14,11 @@ public class LoseController : MonoBehaviour{
     private bool finishStarted = false;
 
 
-    void Update() {
-        if(Input.GetKeyDown(KeyCode.K)){
+     //void Update() {
+        /*if(Input.GetKeyDown(KeyCode.K)){
             StartFinishLoser();
-        }
-    }
+        }*/
+    //}   
     public void StartFinishLoser(){
         //black.
         GetComponent<GameController>().SetCinematic();

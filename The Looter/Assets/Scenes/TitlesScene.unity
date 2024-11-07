@@ -2650,7 +2650,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84903fe4cc9bb4c4eb0bc4e88edef69a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gController: {fileID: 0}
   keeper: {fileID: 0}
+  dog: {fileID: 0}
   lightCar1: {fileID: 0}
   lightCar2: {fileID: 0}
   player: {fileID: 0}
@@ -2658,6 +2660,9 @@ MonoBehaviour:
   black: {fileID: 128228207}
   cross1: {fileID: 0}
   cross2: {fileID: 0}
+  stamina: {fileID: 0}
+  page1: {fileID: 0}
+  page2: {fileID: 0}
 --- !u!65 &309553259
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16482,17 +16487,19 @@ MonoBehaviour:
     \"Stone Walk 3\", \"Stone Walk 4\",  \"Stone Walk 5\",\r \n\"Dirt Walk 1\", \"Dirt
     Walk 2\", \"Dirt Walk 3\", \"Dirt Walk 4\", \"Dirt Walk 5\", \"Spell Impact 1\",
     \"Spell Impact 2\", \"Spell Impact 3\" by TomMusic from itch.io, Royalty-Free,
-    Optional Attribution.\n\nSFXs: \"Flashlight off\", \"Flashlight on\", \"Car_door_shutting\",
-    \"Car_door_opening\", \"Breathing_fast\" by ObsydianX from itch.io, CC 4.0.\n\nSFXs:
+    Optional Attribution.\n\nSFXs: \"horror_01_stinger_synth_1_01\", \"Keys_pick
+    up\", \"Flashlight off\", \"Flashlight on\", \"Car_door_shutting\", \"Car_door_opening\",
+    \"Breathing_fast\" by ObsydianX from itch.io, CC 4.0.\n\nSFXs: \"shdemo-sfx-95\",
     \"shdemo-sfx-166\", \"shdemo-sfx-833\", \"shdemo-sfx-835\", \"shdemo-sfx-757\",
-    \"shdemo-sfx-758\", \"shdemo-sfx-759\" by raudokyubu from itch.io, CC BY.\n\nSFX:
-    \"Perro ladrando   ladrido   efecto de sonido sin copyright - Efectos de sonido
-    y m\xFAsica sin copyright (youtube)\" by Efectos de sonido y m\xFAsica sin copyright
-    from youtube.\n\n\n\n4. Fonts\n\nTitles and Buttons: \"Shlop\" by Typodermic
-    Fonts from Dafont, 100% Free.\n\nTexts: \"BELLGOTHICSTD-BLACK SDF\" by Unkonw,
-    Unknown license.\n\n\n\nAcknowledgments:\r\n\nTo my family for supporting me
-    throughout this career.\r\n\nTo my colleagues in the industry for sharing this
-    passion for video games.\r\n\nTo all the teachers of this course for sharing
+    \"shdemo-sfx-758\", \"shdemo-sfx-759\" by raudokyubu from itch.io, CC BY.\n\nSFXs:
+    \"African2\", \"African3\", \"African4\", by cyrex-studios from itch.io, CC BY
+    4.0\n\nSFX: \"Perro ladrando   ladrido   efecto de sonido sin copyright - Efectos
+    de sonido y m\xFAsica sin copyright (youtube)\" by Efectos de sonido y m\xFAsica
+    sin copyright from youtube.\n\n\n\n4. Fonts\n\nTitles and Buttons: \"Shlop\"
+    by Typodermic Fonts from Dafont, 100% Free.\n\nTexts: \"BELLGOTHICSTD-BLACK SDF\"
+    by Unkonw, Unknown license.\n\n\n\nAcknowledgments:\r\n\nTo my family for supporting
+    me throughout this career.\r\n\nTo my colleagues in the industry for sharing
+    this passion for video games.\r\n\nTo all the teachers of this course for sharing
     their knowledge about making video games!\r\n\r\nThank you very much <3"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5a4f61c239adb524a81512412106d65e, type: 2}

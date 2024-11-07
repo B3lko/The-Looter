@@ -143,9 +143,21 @@ public class LockPuzzleController : MonoBehaviour{
         }
 
         // Asigna los valores de la clave correcta (A, B, C) a los textos seleccionados
-        selectedTexts[0].GetComponent<TextMeshPro>().text = $"A{correctA}";
-        selectedTexts[1].GetComponent<TextMeshPro>().text = $"B{correctB}";
-        selectedTexts[2].GetComponent<TextMeshPro>().text = $"C{correctC}";
+        string hex1 = "70823e";
+        string hex2 = "e0b44a";
+        string hex3 = "d8853f";
+        //selectedTexts[0].GetComponent<TextMeshPro>().color = a;
+
+        Color a, b, c;
+        if (ColorUtility.TryParseHtmlString("#" + hex1, out a)){selectedTexts[0].GetComponent<TextMeshPro>().color = a;}
+        if (ColorUtility.TryParseHtmlString("#" + hex2, out b)){selectedTexts[1].GetComponent<TextMeshPro>().color = b;}
+        if (ColorUtility.TryParseHtmlString("#" + hex3, out c)){selectedTexts[2].GetComponent<TextMeshPro>().color = c;}
+
+
+        //selectedTexts[0].GetComponent<TextMeshPro>().text = $"A{correctA}";
+        selectedTexts[0].GetComponent<TextMeshPro>().text = $"{correctA}";
+        selectedTexts[1].GetComponent<TextMeshPro>().text = $"{correctB}";
+        selectedTexts[2].GetComponent<TextMeshPro>().text = $"{correctC}";
 
         // Activa solo los tres textos seleccionados
         foreach (Transform textTransform in selectedTexts){

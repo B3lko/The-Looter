@@ -76,25 +76,12 @@ public class Raycast : MonoBehaviour{
                 text.gameObject.SetActive(true);
             }
             else if(hit.transform.gameObject.tag == "Tomb"){
-                /*text.text = textsString["Tomb"];
+                text.text = "R.I.P. " + hit.transform.gameObject.GetComponent<TombController>().GetName();
                 text.gameObject.SetActive(true);
-                if(Input.GetKeyDown(KeyCode.E)){
-                    textDown.text = hit.transform.gameObject.GetComponent<TombController>().GetName();
-                    textDown.gameObject.SetActive(true);
-                    DOVirtual.DelayedCall(3, () => {
-                        textDown.gameObject.SetActive(false);
-                    });
-                }*/
-                text.text = hit.transform.gameObject.GetComponent<TombController>().GetName();
+            }
+            else if(hit.transform.gameObject.tag == "PopeTomb"){
+                text.text = "R.I.P. Pope Carl Johnson";
                 text.gameObject.SetActive(true);
-                //if(Input.GetKeyDown(KeyCode.E)){
-                    //textDown.text = hit.transform.gameObject.GetComponent<TombController>().GetName();
-                    //textDown.gameObject.SetActive(true);
-                    //DOVirtual.DelayedCall(3, () => {
-                      //  textDown.gameObject.SetActive(false);
-                    //});
-                //}
-                
             }
             else if(hit.transform.gameObject.tag == "Jewel"){
                 text.text = textsString["Jewel"];
@@ -147,6 +134,20 @@ public class Raycast : MonoBehaviour{
                 }
                 if(Input.GetKeyDown(KeyCode.E)){
                     hit.transform.gameObject.GetComponent<WallCoffinController>().DoAction();
+                }
+            }
+            else if(hit.transform.gameObject.tag == "Coffin3"){
+                if( hit.transform.gameObject.GetComponent<WallCoffinController>().GetIndex() == 0){
+                    text.text = textsString["TombDoorWall"];
+                }
+                else{
+                    text.text = textsString["Coffin"];
+                }
+                if(!hit.transform.gameObject.GetComponent<PopeCoffin>().isInAction()){
+                    text.gameObject.SetActive(true);
+                }
+                if(Input.GetKeyDown(KeyCode.E)){
+                    hit.transform.gameObject.GetComponent<PopeCoffin>().DoAction();
                 }
             }
             else if(hit.transform.gameObject.tag == "PuzzleDoor"){

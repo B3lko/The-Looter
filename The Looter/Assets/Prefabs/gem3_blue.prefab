@@ -111,7 +111,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Jewel
-  pickSFX: {fileID: 3021575078475701657, guid: e8be729afa3e56e448fad7b3dce5d18c, type: 3}
+  pickSFX: {fileID: -8269156260653712544}
+  pope: {fileID: 0}
 --- !u!114 &7859887122622750622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,6 +125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7359a9d6a1993c64b92756ab5d67eed5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isWall: 0
+  pickSFX: {fileID: -8269156260653712544}
 --- !u!65 &-4567320003166785567
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -155,7 +158,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 6499961677869081022, guid: 7c6f42efab24b944c95cddf9e8af77d0, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 37007685fdc2ff942853d21128588e91, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 1deaaf1496c4f51418537c89d7033697, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

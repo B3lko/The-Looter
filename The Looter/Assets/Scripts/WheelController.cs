@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class WheelController : MonoBehaviour{
     [SerializeField] GameObject gController;
+    [SerializeField] GameObject text1;
+    [SerializeField] GameObject text2;
     [SerializeField] GameObject keeper;
     [SerializeField] GameObject dog;
     [SerializeField] GameObject lightCar1;
@@ -31,9 +33,9 @@ public class WheelController : MonoBehaviour{
 
 
     void Update(){
-        if(Input.GetKeyDown(KeyCode.M)){
+        /*if(Input.GetKeyDown(KeyCode.M)){
             FinishGame();
-        }  
+        }  */
         if(isRotting){
             rotWheels(isBack);
         }
@@ -57,6 +59,8 @@ public class WheelController : MonoBehaviour{
 
 
     public void SetTransition(){
+        text1.SetActive(false);
+        text2.SetActive(false);
         black.color = color;
         black.gameObject.SetActive(true);
 
@@ -112,7 +116,7 @@ public class WheelController : MonoBehaviour{
                         black.gameObject.SetActive(true);
                         black.DOFade(1, 2).OnComplete(() => {
                             if(GameData.Instance.collectedGreat){
-                                GameData.Instance.SetEnding("money");
+                                GameData.Instance.SetEnding("Money");
                             }
                             else{
                                 GameData.Instance.SetEnding("failed escape");

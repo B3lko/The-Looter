@@ -36,6 +36,7 @@ public class GameController : MonoBehaviour{
     public AudioMixer audioMixer;
     private bool inCinematic = false;
     private string tagToCheck = "Book";
+    private bool aux = false;
 
 
 
@@ -51,12 +52,12 @@ public class GameController : MonoBehaviour{
         currentJewels += 1;
         text.gameObject.SetActive(true);
         text.text = "collected jewelry: " + currentJewels + " / 4";
-        if(currentJewels == gameObject.GetComponent<NameLoader>().GetBooks()){
+        /*if(currentJewels == gameObject.GetComponent<NameLoader>().GetBooks() && GameData.Instance.collectedGreat){
             text.text = "collected jewelry: " + currentJewels + " / 4" + "\n" + "escape with the car!";
             winner = true;
             Door1.GetComponent<DoorController>().SetState(2);
             Door2.GetComponent<DoorController>().SetState(2);
-        }
+        }*/
         DOVirtual.DelayedCall(3, () => {
             text.gameObject.SetActive(false);
         });
@@ -74,7 +75,7 @@ public class GameController : MonoBehaviour{
 
 
     void Start(){
-        checktag();
+       // checktag();
         //Debug.Log("PlayTImeeee: " +  GameData.Instance.playTime);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -99,7 +100,7 @@ public class GameController : MonoBehaviour{
             GameObject matchingTomb = FindMatchingTomb(nameToMatch);
             // Si encontramos la tumba correspondiente, instanciar el prefab
             if (matchingTomb != null){
-                Debug.Log("masdasdsa");
+                //Debug.Log("masdasdsa");
                 ///Instantiate(JewelPrefab, matchingTomb.transform.Find("Coffin1").transform.position, Quaternion.identity, matchingTomb.transform);
                 //Instantiate(JewelPrefab, matchingTomb.transform.GetChild(0).transform.position, Quaternion.identity, matchingTomb.transform);
                 //Instantiate(JewelPrefabs[0], matchingTomb.transform.parent.transform.GetChild(0).transform.position, Quaternion.identity, matchingTomb.transform.parent);
@@ -141,7 +142,7 @@ public class GameController : MonoBehaviour{
         }
     }
 
-    private void checktag(){
+   /* private void checktag(){
         GameObject[] objectsWithTag = GameObject.FindGameObjectsWithTag(tagToCheck);
 
         // Verifica si hay más de un objeto con ese tag
@@ -161,19 +162,30 @@ public class GameController : MonoBehaviour{
         {
             Debug.Log($"No se encontraron objetos con el tag '{tagToCheck}' en la escena.");
         }
-    }
+    }*/
 
 
     void Update(){
         
         if(!isPause){
-            //GameData.Instance.UpdatePlayTime(Time.deltaTime);
+            GameData.Instance.UpdatePlayTime(Time.deltaTime);
         }
-        if(Input.GetKeyDown(KeyCode.C)){
+        /*if(Input.GetKeyDown(KeyCode.C)){
             SceneManager.LoadScene("SummaryScene");
-        }
+        }*/
         if(Input.GetKeyDown(KeyCode.P) && !inCinematic){
             SetPause();
+        }
+        if(currentJewels == gameObject.GetComponent<NameLoader>().GetBooks() && GameData.Instance.collectedGreat && !aux){
+            aux = true;
+            text.text = "Escape with the car!";
+            text.gameObject.SetActive(true);
+            winner = true;
+            Door1.GetComponent<DoorController>().SetState(2);
+            Door2.GetComponent<DoorController>().SetState(2);
+            DOVirtual.DelayedCall(3, () => {
+                text.gameObject.SetActive(false);
+            });
         }
     }
 
