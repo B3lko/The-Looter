@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour{
     public Image black;
 
     //
+    [SerializeField] GameObject rainController;
     [SerializeField] GameObject canvas1;
     [SerializeField] GameObject Door1;
     [SerializeField] GameObject Door2;
@@ -168,7 +169,7 @@ public class GameController : MonoBehaviour{
     void Update(){
         
         if(!isPause){
-            GameData.Instance.UpdatePlayTime(Time.deltaTime);
+            //GameData.Instance.UpdatePlayTime(Time.deltaTime);
         }
         /*if(Input.GetKeyDown(KeyCode.C)){
             SceneManager.LoadScene("SummaryScene");
@@ -199,6 +200,7 @@ public class GameController : MonoBehaviour{
         cam.GetComponent<CameraController>().SetPause();
         player.GetComponent<PlayerController>().SetPause();
         isPause = !isPause;
+        rainController.GetComponent<RainController>().SetPause(isPause);
         if(isPause){
             canvas1.SetActive(false);
             Cursor.visible = true;

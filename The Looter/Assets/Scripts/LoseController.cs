@@ -6,6 +6,7 @@ using DG.Tweening;
 
 public class LoseController : MonoBehaviour{
     [SerializeField] GameObject black;
+    [SerializeField] GameObject rController;
     [SerializeField] GameObject keeper;
     [SerializeField] GameObject dog;
     [SerializeField] GameObject player;
@@ -22,7 +23,6 @@ public class LoseController : MonoBehaviour{
     public void StartFinishLoser(){
         //black.
         GetComponent<GameController>().SetCinematic();
-        
         player.GetComponent<PlayerController>().SetMove(false);
         player.transform.GetChild(0).transform.localRotation = Quaternion.Euler(10, transform.localRotation.y, transform.localRotation.z);
         keeper.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
@@ -33,9 +33,11 @@ public class LoseController : MonoBehaviour{
     }
 
     public void SetAFinish(){
+
         gameObject.GetComponent<GameController>().StopMusic();
         dog.GetComponent<DogController>().Bark0();
         punch.PlayOneShot(punchs[0]);
+        rController.GetComponent<RainController>().Dest();
         black.SetActive(true);
         transform.DOScale(1, 2).OnComplete(() => {
             punch.pitch = 0.6f;
