@@ -7,9 +7,11 @@ public class SummaryScreen : MonoBehaviour{
     [SerializeField] TextMeshProUGUI endingText;
     [SerializeField] TextMeshProUGUI playTimeText;
     [SerializeField] TextMeshProUGUI collectedKeysText;
+    [SerializeField] TextMeshProUGUI collectedKeysText2;
     [SerializeField] TextMeshProUGUI lootedTombsText;
     [SerializeField] TextMeshProUGUI GreatText;
     [SerializeField] Image black2;
+    [SerializeField] GameObject nextButton;
 
     void Start(){
         black2.DOFade(0, 2).OnComplete(() => {
@@ -18,9 +20,21 @@ public class SummaryScreen : MonoBehaviour{
             Cursor.lockState = CursorLockMode.None;
         });
         PlayTime();
-        collectedKeysText.text = GameData.Instance.collectedKeys + " / 4";
+        if(GameData.Instance.hasKeys){
+            collectedKeysText.text = GameData.Instance.collectedKeys + " / 4";
+        }
+        else{
+            collectedKeysText.gameObject.SetActive(false);
+            collectedKeysText2.gameObject.SetActive(false);
+        }
         
-        lootedTombsText.text = GameData.Instance.collectedJewels + " / 5";
+        if(GameData.Instance.ending == "05"){
+            nextButton.SetActive(false);
+            lootedTombsText.text = GameData.Instance.collectedJewels + " / 5";
+        }
+        else{
+            lootedTombsText.text = GameData.Instance.collectedJewels + " / 4";
+        }
         if(GameData.Instance.collectedGreat){
             GreatText.text = "yes";
         }
@@ -28,6 +42,7 @@ public class SummaryScreen : MonoBehaviour{
             GreatText.text = "no";
         }
         endingText.text = GameData.Instance.ending;
+
         if(endingText.text == "Money"){
             lootedTombsText.text = (GameData.Instance.collectedJewels + 1) + " / 5";
         }
@@ -38,6 +53,15 @@ public class SummaryScreen : MonoBehaviour{
         black2.gameObject.SetActive(true);
         black2.DOFade(1, 2).OnComplete(() => {
             SceneManager.LoadScene("MainMenu");
+        });
+
+    }
+
+    public void GoNext(){
+        black2.gameObject.SetActive(true);
+        black2.DOFade(1, 2).OnComplete(() => {
+            string nName = "GameScene_G0" + (int.Parse(GameData.Instance.ending) + 1);
+            SceneManager.LoadScene(nName);
         });
 
     }

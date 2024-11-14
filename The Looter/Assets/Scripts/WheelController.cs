@@ -124,12 +124,12 @@ public class WheelController : MonoBehaviour{
                         black.color = color;
                         black.gameObject.SetActive(true);
                         black.DOFade(1, 2).OnComplete(() => {
-                            if(GameData.Instance.collectedGreat){
+                            /*if(GameData.Instance.collectedGreat){
                                 GameData.Instance.SetEnding("Money");
-                            }
-                            else{
+                            }*/
+                            /*else{
                                 GameData.Instance.SetEnding("failed escape");
-                            }
+                            }*/
                             SceneManager.LoadScene("TitlesScene");
                         });
                     });

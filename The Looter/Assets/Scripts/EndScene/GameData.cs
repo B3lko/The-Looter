@@ -13,6 +13,8 @@ public class GameData : MonoBehaviour{
     public int collectedKeys;
     public int collectedJewels;
     public bool collectedGreat = false;
+    public bool hasKeys;
+    //public string levelName;
 
     void Awake(){
         // Asegurarnos de que solo haya una instancia de GameData

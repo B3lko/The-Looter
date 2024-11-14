@@ -38,6 +38,8 @@ public class GameController : MonoBehaviour{
     private bool inCinematic = false;
     private string tagToCheck = "Book";
     private bool aux = false;
+    public bool hasGreat;
+    public string levelName;
 
 
 
@@ -76,6 +78,7 @@ public class GameController : MonoBehaviour{
 
 
     void Start(){
+        GameData.Instance.ending = levelName;
        // checktag();
         //Debug.Log("PlayTImeeee: " +  GameData.Instance.playTime);
         Cursor.visible = true;
@@ -169,7 +172,7 @@ public class GameController : MonoBehaviour{
     void Update(){
         
         if(!isPause){
-            //GameData.Instance.UpdatePlayTime(Time.deltaTime);
+            GameData.Instance.UpdatePlayTime(Time.deltaTime);
         }
         /*if(Input.GetKeyDown(KeyCode.C)){
             SceneManager.LoadScene("SummaryScene");
@@ -177,16 +180,32 @@ public class GameController : MonoBehaviour{
         if(Input.GetKeyDown(KeyCode.P) && !inCinematic){
             SetPause();
         }
-        if(currentJewels == gameObject.GetComponent<NameLoader>().GetBooks() && GameData.Instance.collectedGreat && !aux){
-            aux = true;
-            text.text = "Escape with the car!";
-            text.gameObject.SetActive(true);
-            winner = true;
-            Door1.GetComponent<DoorController>().SetState(2);
-            Door2.GetComponent<DoorController>().SetState(2);
-            DOVirtual.DelayedCall(3, () => {
-                text.gameObject.SetActive(false);
-            });
+        
+        if(currentJewels == gameObject.GetComponent<NameLoader>().GetBooks() && !aux){
+            if(hasGreat){
+                if(GameData.Instance.collectedGreat){
+                    aux = true;
+                    text.text = "Escape with the car!";
+                    text.gameObject.SetActive(true);
+                    winner = true;
+                    Door1.GetComponent<DoorController>().SetState(2);
+                    Door2.GetComponent<DoorController>().SetState(2);
+                    DOVirtual.DelayedCall(3, () => {
+                        text.gameObject.SetActive(false);
+                    });
+                }
+            }
+            else{
+                aux = true;
+                text.text = "Escape with the car!";
+                text.gameObject.SetActive(true);
+                winner = true;
+                Door1.GetComponent<DoorController>().SetState(2);
+                Door2.GetComponent<DoorController>().SetState(2);
+                DOVirtual.DelayedCall(3, () => {
+                    text.gameObject.SetActive(false);
+                });
+            }
         }
     }
 

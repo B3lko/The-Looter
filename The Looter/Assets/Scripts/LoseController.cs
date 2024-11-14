@@ -51,7 +51,7 @@ public class LoseController : MonoBehaviour{
                     punch.pitch = 0.2f;
                     punch.PlayOneShot(punchs[0]);
                     transform.DOScale(1, 2).OnComplete(() => {
-                        GameData.Instance.SetEnding("trapped");
+                        //GameData.Instance.SetEnding("trapped");
                         SceneManager.LoadScene("SummaryScene");
                     });
                 });
