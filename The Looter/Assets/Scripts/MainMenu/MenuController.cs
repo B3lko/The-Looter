@@ -13,6 +13,7 @@ public class MenuController : MonoBehaviour{
     public GameObject Gamedat;
     public GameObject Screen_Menu;
     public GameObject Screen_Settings;
+    public GameObject Screen_Levels;
     [SerializeField] AudioSource music;
 
 
@@ -49,5 +50,23 @@ public class MenuController : MonoBehaviour{
     public void SetScreenMenu(){
         Screen_Settings.SetActive(false);
         Screen_Menu.SetActive(true);
+    }
+
+    public void SetScreenMenu2(){
+        Screen_Levels.SetActive(false);
+        Screen_Menu.SetActive(true);
+    }
+
+    public void SetLevels(){
+        Screen_Menu.SetActive(false);
+        Screen_Levels.SetActive(true);
+    }
+
+    public void SetLevel(int index){
+        black.gameObject.SetActive(true);
+        music.DOFade(0, 3);
+        black.DOFade(1, 3).OnComplete(() => {
+            SceneManager.LoadScene("GameScene_G0" + index);
+        });
     }
 }

@@ -24,6 +24,7 @@ public class WheelController : MonoBehaviour{
     Color color;
     private bool isRotting = false;
     private bool isBack = false;
+    public bool isFinishLevel;
 
     // Start is called before the first frame update
     void Start(){
@@ -68,26 +69,34 @@ public class WheelController : MonoBehaviour{
 
         player.GetComponent<PlayerController>().SetMove(false);
         keeper.SetActive(false);
+        if(dog)
         dog.SetActive(false);
 
-        black.DOFade(1, 2).OnComplete(() => {
-            page1.gameObject.SetActive(false);
-            page2.gameObject.SetActive(false);
-            stamina.gameObject.SetActive(false);
-            cross1.gameObject.SetActive(false);
-            cross2.gameObject.SetActive(false);
-            car.transform.GetChild(4).transform.localRotation = Quaternion.Euler(-90, 0, 0);
-            car.transform.GetChild(12).transform.localRotation = Quaternion.Euler(-90, 0, 0);
-            lightCar1.SetActive(true);
-            lightCar2.SetActive(true);
-            player.transform.position = new Vector3(-6, 2, -50);
-            player.transform.localRotation = Quaternion.Euler(0, -260, 0);
-            player.transform.GetChild(0).transform.localRotation = Quaternion.Euler(0, 0, 0);
+        if(isFinishLevel){
+            black.DOFade(1, 2).OnComplete(() => {
+                page1.gameObject.SetActive(false);
+                page2.gameObject.SetActive(false);
+                stamina.gameObject.SetActive(false);
+                cross1.gameObject.SetActive(false);
+                cross2.gameObject.SetActive(false);
+                car.transform.GetChild(4).transform.localRotation = Quaternion.Euler(-90, 0, 0);
+                car.transform.GetChild(12).transform.localRotation = Quaternion.Euler(-90, 0, 0);
+                lightCar1.SetActive(true);
+                lightCar2.SetActive(true);
+                player.transform.position = new Vector3(-6, 2, -50);
+                player.transform.localRotation = Quaternion.Euler(0, -260, 0);
+                player.transform.GetChild(0).transform.localRotation = Quaternion.Euler(0, 0, 0);
 
-            black.DOFade(0, 2).OnComplete(() => {
-                FinishGame();
+                black.DOFade(0, 2).OnComplete(() => {
+                    FinishGame();
+                });
             });
-        });
+        }
+        else{
+            black.DOFade(1, 2).OnComplete(() => {
+                SceneManager.LoadScene("SummaryScene");
+            });
+        }
     }
 
     public void FinishGame(){

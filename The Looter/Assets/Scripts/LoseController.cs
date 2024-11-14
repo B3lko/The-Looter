@@ -35,7 +35,9 @@ public class LoseController : MonoBehaviour{
     public void SetAFinish(){
 
         gameObject.GetComponent<GameController>().StopMusic();
-        dog.GetComponent<DogController>().Bark0();
+        if(dog){
+            dog.GetComponent<DogController>().Bark0();
+        }
         punch.PlayOneShot(punchs[0]);
         rController.GetComponent<RainController>().Dest();
         black.SetActive(true);

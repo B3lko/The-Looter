@@ -191,8 +191,10 @@ public class GameController : MonoBehaviour{
     }
 
     public void SetPause(){
-        if(dog.activeSelf){
-            dog.GetComponent<DogController>().SetPause();
+        if(dog){
+            if(dog.activeSelf){
+                dog.GetComponent<DogController>().SetPause();
+            }
         }
         if(keeper.activeSelf){
             keeper.GetComponent<KeeperController>().SetPause();
