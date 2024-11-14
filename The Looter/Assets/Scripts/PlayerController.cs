@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour{
     [SerializeField] GameObject flashLigth;
     [SerializeField] GameObject book;
+    [SerializeField] GameObject bookBtn;
     [SerializeField] GameObject next;
     [SerializeField] GameObject previous;
     [SerializeField] bool hasALigthFlash = false;
@@ -103,19 +104,24 @@ public class PlayerController : MonoBehaviour{
 
     private void BookUpdate(){
         if(Input.GetKeyDown(KeyCode.B)){
-           isBookOn = !isBookOn; 
-            canMove = !isBookOn;
-            book.SetActive(isBookOn);
-            next.SetActive(isBookOn);
-            previous.SetActive(isBookOn);
-            if(isBookOn){
-                flashLigthOn.Play();
-            }
-            else{
-                flashLigthOff.Play();
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Locked;
-            }
+           ToggleBook();
+        }
+    }
+
+    public void ToggleBook(){
+        isBookOn = !isBookOn; 
+        bookBtn.SetActive(isBookOn);
+        canMove = !isBookOn;
+        book.SetActive(isBookOn);
+        next.SetActive(isBookOn);
+        previous.SetActive(isBookOn);
+        if(isBookOn){
+            flashLigthOn.Play();
+        }
+        else{
+            flashLigthOff.Play();
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
 

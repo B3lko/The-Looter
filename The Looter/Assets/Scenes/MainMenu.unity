@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.072554685, g: 0.09936852, b: 0.14445397, a: 1}
+  m_IndirectSpecularColor: {r: 0.04031692, g: 0.07136849, b: 0.12386132, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1834,6 +1834,7 @@ MonoBehaviour:
   collectedKeys: 0
   collectedJewels: 0
   collectedGreat: 0
+  hasKeys: 0
 --- !u!4 &345801427
 Transform:
   m_ObjectHideFlags: 0
@@ -7266,8 +7267,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1525209842}
         m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
-        m_MethodName: SetLevel
-        m_Mode: 3
+        m_MethodName: SetIntro
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

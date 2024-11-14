@@ -69,4 +69,12 @@ public class MenuController : MonoBehaviour{
             SceneManager.LoadScene("GameScene_G0" + index);
         });
     }
+
+    public void SetIntro(){
+        black.gameObject.SetActive(true);
+        music.DOFade(0, 3);
+        black.DOFade(1, 3).OnComplete(() => {
+            SceneManager.LoadScene("IntroScene");
+        });
+    }
 }
