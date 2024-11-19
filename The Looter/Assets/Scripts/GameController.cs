@@ -16,7 +16,7 @@ public class GameController : MonoBehaviour{
     public Image black;
 
     //
-    [SerializeField] GameObject rainController;
+    //[SerializeField] GameObject rainController;
     [SerializeField] GameObject canvas1;
     [SerializeField] GameObject Door1;
     [SerializeField] GameObject Door2;
@@ -39,6 +39,7 @@ public class GameController : MonoBehaviour{
     private string tagToCheck = "Book";
     private bool aux = false;
     public bool hasGreat;
+    public bool hKeys;
     public string levelName;
 
 
@@ -78,7 +79,10 @@ public class GameController : MonoBehaviour{
 
 
     void Start(){
+        GameData.Instance.ResetData();
         GameData.Instance.ending = levelName;
+        GameData.Instance.hasKeys = hKeys;
+
        // checktag();
         //Debug.Log("PlayTImeeee: " +  GameData.Instance.playTime);
         Cursor.visible = true;
@@ -221,7 +225,7 @@ public class GameController : MonoBehaviour{
         cam.GetComponent<CameraController>().SetPause();
         player.GetComponent<PlayerController>().SetPause();
         isPause = !isPause;
-        rainController.GetComponent<RainController>().SetPause(isPause);
+        //rainController.GetComponent<RainController>().SetPause(isPause);
         if(isPause){
             canvas1.SetActive(false);
             Cursor.visible = true;

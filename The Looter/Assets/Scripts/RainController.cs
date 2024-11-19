@@ -13,7 +13,7 @@ public class RainController : MonoBehaviour
     private bool isRaining = false;
     private bool isPaused = false;
 
-    private void Start()
+    /*private void Start()
     {
         // Configuramos el tiempo inicial aleatorio
         SetRandomInterval();
@@ -40,9 +40,9 @@ public class RainController : MonoBehaviour
             // Establecemos un nuevo intervalo de tiempo aleatorio para la próxima vez
             SetRandomInterval();
         }
-    }
+    }*/
 
-    private void StartRain()
+   /* private void StartRain()
     {
         isRaining = true;
 
@@ -60,9 +60,9 @@ public class RainController : MonoBehaviour
         audioSource2.DOFade(0f, fadeDuration).OnComplete(() => {
             audioSource2.Stop();
         });
-    }
+    }*/
 
-    private void StopRain()
+  /*  private void StopRain()
     {
         isRaining = false;
 
@@ -91,77 +91,10 @@ public class RainController : MonoBehaviour
     public void SetPause(bool pause)
     {
         isPaused = pause;
-    }
+    }*/
 
     public void Dest(){
         Destroy(gameObject);
     }
 }
 
-/*using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using DG.Tweening;
-
-
-public class RainController : MonoBehaviour{
-    //public GameObject objeto1;
-    public GameObject objeto2;
-    public float intervalo = 10.0f;
-
-    private Coroutine toggleCoroutine;
-    private bool isPaused = false;
-
-    private void Start()
-    {
-        toggleCoroutine = StartCoroutine(ToggleCoroutine());
-    }
-
-    private IEnumerator ToggleCoroutine()
-    {
-        while (true)
-        {
-            GetComponent<ParticleSystem>().Play();//objeto1.SetActive(true);
-            GetComponent<AudioSource>().volume = 0f;
-            GetComponent<AudioSource>().Play();
-            GetComponent<AudioSource>().DOFade(1f, 3f);
-            objeto2.GetComponent<AudioSource>().DOFade(0f, 3f).OnComplete(() => {
-                objeto2.GetComponent<AudioSource>().Stop();
-            });
-
-            yield return new WaitForSeconds(intervalo);
-
-            GetComponent<AudioSource>().DOFade(0f, 3f).OnComplete(() => {
-                GetComponent<AudioSource>().Stop();
-            });
-            GetComponent<ParticleSystem>().Stop();//objeto1.SetActive(true);
-            objeto2.GetComponent<AudioSource>().volume = 0f;
-            objeto2.GetComponent<AudioSource>().Play();
-            objeto2.GetComponent<AudioSource>().DOFade(1f, 3f);
-
-
-            yield return new WaitForSeconds(intervalo);
-        }
-    }
-
-    public void SetPause(bool pause)
-    {
-        isPaused = pause;
-
-        if (isPaused)
-        {
-            if (toggleCoroutine != null)
-            {
-                StopCoroutine(toggleCoroutine);
-            }
-        }
-        else
-        {
-            if (toggleCoroutine == null)
-            {
-                toggleCoroutine = StartCoroutine(ToggleCoroutine());
-            }
-        }
-    }
-}
-*/

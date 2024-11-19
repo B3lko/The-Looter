@@ -6,7 +6,7 @@ public class KeyController : MonoBehaviour{
     [SerializeField] GameObject keyPosition;
     [SerializeField] GameObject keyPrefab;
     private List<GameObject> keyPositions = new List<GameObject>();
-    private int cantKeys = 4;
+    public int cantKeys = 4;
 
     void Start(){ 
 

@@ -39,6 +39,7 @@ public class LoseController : MonoBehaviour{
             dog.GetComponent<DogController>().Bark0();
         }
         punch.PlayOneShot(punchs[0]);
+        if(rController)
         rController.GetComponent<RainController>().Dest();
         black.SetActive(true);
         transform.DOScale(1, 2).OnComplete(() => {
